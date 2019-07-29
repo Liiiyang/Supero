@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Door
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Door
+    uniqueID: 1357162463
+    locked: 0
+  - name: Top
+    uniqueID: 3150436309
+    locked: 0
+  - name: Player
+    uniqueID: 1095784321
+    locked: 0
+  - name: Enemies
+    uniqueID: 589903813
+    locked: 0
+  - name: Obstacles
+    uniqueID: 2514765755
+    locked: 0

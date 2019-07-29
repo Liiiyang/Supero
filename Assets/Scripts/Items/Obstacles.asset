@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9969604ef22403144b3cfb1e5ab16aad, type: 3}
+  m_Name: Obstacles
+  m_EditorClassIdentifier: 
+  objectsToSpawn: {fileID: 5087220867480320324, guid: 65bb542d5ac5b1646a5b534b094e54c3,
+    type: 3}
+  minSpawn: 1
+  maxSpawn: 2
