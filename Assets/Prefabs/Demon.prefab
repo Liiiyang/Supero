@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 1645728965431897130}
   - component: {fileID: 4553854784076673381}
   - component: {fileID: 2332585191587335656}
-  m_Layer: 0
+  - component: {fileID: 4734409711564687443}
+  - component: {fileID: 3866823994019302160}
+  m_Layer: 8
   m_Name: Demon
-  m_TagString: Untagged
+  m_TagString: boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,3 +108,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3999324, y: 1.6651316}
   m_EdgeRadius: 0
+--- !u!114 &4734409711564687443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694727574382115023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10407334c5bc18e4cb066e7ee73dca47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialHealth: 0
+  oldgameObjects: []
+  savedGameObjects: []
+  isBossDead: 0
+--- !u!114 &3866823994019302160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694727574382115023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48ea40ee499f464fa55040d5d1714cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnBoss: 0
+  hc: {fileID: 4734409711564687443}

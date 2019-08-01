@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Door
+  - stage
+  - enemy
+  - obstacle
+  - boss
+  - portal
+  - bossRoom
   layers:
   - Default
   - TransparentFX
@@ -14,8 +20,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - enemy
+  - player
   - 
   - 
   - 
@@ -56,4 +62,10 @@ TagManager:
     locked: 0
   - name: Obstacles
     uniqueID: 2514765755
+    locked: 0
+  - name: boss_props
+    uniqueID: 2100732513
+    locked: 0
+  - name: portal
+    uniqueID: 3871369321
     locked: 0

@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d;
     private Vector2 moveVelocity;
 
+
+    public GameObject[] gameObjects;
+    public GameObject[] savedGameObjects;
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -16,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        gameObjects = GameObject.FindGameObjectsWithTag("enemy");
+
         //Store the current horizontal input in the float moveHorizontal.
         float moveHorizontal = Input.GetAxis("Horizontal");
 
@@ -26,20 +31,15 @@ public class PlayerController : MonoBehaviour
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
 
         moveVelocity = movement.normalized * speed;
+
+
     }
 
     void FixedUpdate()
     {
         rb2d.MovePosition(rb2d.position + moveVelocity * Time.fixedDeltaTime);
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
 
         
     }
-
-
-
     
 }

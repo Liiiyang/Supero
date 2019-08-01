@@ -20,6 +20,8 @@ public class GridController : MonoBehaviour
     public GameObject gridTile;
     public List<Vector2> availablePoints = new List<Vector2>();
 
+    public bool StopSpawning = false;
+
     void Awake()
     {
         room = GetComponentInParent<Room>();
@@ -29,12 +31,23 @@ public class GridController : MonoBehaviour
         
     }
 
+
     IEnumerator DelaySpawns()
     {
         yield return new WaitForSeconds(2);
         GeneratedGrid();
     }
 
+    void Update()
+    {
+        if (GetComponentInParent<ObjectGenerator>().spawning && !StopSpawning)
+        {
+            Debug.Log("Spawn Boss");
+            GeneratedGrid();
+            StopSpawning = true;
+        }
+        
+    }
     public void GeneratedGrid()
     {
         grid.verticalOffset += room.transform.localPosition.y;
@@ -49,7 +62,7 @@ public class GridController : MonoBehaviour
                 go.name = "X: " + x + ", Y: " + y;
                 availablePoints.Add(go.transform.position);
                 //Deactivate grid map, defines objects spawn space
-                //go.SetActive(false);
+                go.SetActive(false);
             }
         }
 
