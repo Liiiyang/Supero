@@ -25,8 +25,8 @@ public class GridController : MonoBehaviour
     void Awake()
     {
         room = GetComponentInParent<Room>();
-        grid.columns = room.width - 5;
-        grid.rows = room.height - 6;
+        grid.columns = room.width - 12;
+        grid.rows = room.height - 13;
         StartCoroutine(DelaySpawns());
         
     }
@@ -35,7 +35,11 @@ public class GridController : MonoBehaviour
     IEnumerator DelaySpawns()
     {
         yield return new WaitForSeconds(2);
-        GeneratedGrid();
+        if (gameObject.tag != "bossRoom")
+        {
+            GeneratedGrid();
+        }
+        
     }
 
     void Update()
@@ -43,8 +47,12 @@ public class GridController : MonoBehaviour
         if (GetComponentInParent<ObjectGenerator>().spawning && !StopSpawning)
         {
             Debug.Log("Spawn Boss");
-            GeneratedGrid();
-            StopSpawning = true;
+            if (gameObject.tag == "bossRoom")
+            {
+                GeneratedGrid();
+                StopSpawning = true;
+            }
+            
         }
         
     }

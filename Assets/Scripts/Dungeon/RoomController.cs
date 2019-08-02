@@ -89,11 +89,14 @@ public class RoomController : MonoBehaviour
         if(roomQueue.Count == 0)
         {
             Room bossRoom = roomList[roomList.Count - 1];
-            Room tempRoom = new Room(bossRoom.x, bossRoom.y);
-            Destroy(bossRoom.gameObject);
-            var roomToRemove = roomList.Single( r => r.x  == tempRoom.x && r.y == tempRoom.y);
-            roomList.Remove(roomToRemove);
-            LoadRoom("Boss", tempRoom.x, tempRoom.y);
+            if(bossRoom.x>1 ||bossRoom.x<1|| bossRoom.y>1 || bossRoom.y<1)
+            {
+                Room tempRoom = new Room(bossRoom.x, bossRoom.y);
+                Destroy(bossRoom.gameObject);
+                var roomToRemove = roomList.Single( r => r.x  == tempRoom.x && r.y == tempRoom.y);
+                roomList.Remove(roomToRemove);
+                LoadRoom("Boss", tempRoom.x, tempRoom.y);
+            }
         }
     }
 
@@ -103,13 +106,12 @@ public class RoomController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         if(roomQueue.Count == 1)
         {
-            Room shopRoom = roomList[roomList.Count - 2];
-            Room tempRoom = new Room(shopRoom.x, shopRoom.y);
-            Destroy(shopRoom.gameObject);
-            var roomToRemove = roomList.Single( r => r.x  == tempRoom.x && r.y == tempRoom.y);
-            roomList.Remove(roomToRemove);
-            LoadRoom("Shop", tempRoom.x, tempRoom.y);
-
+                Room shopRoom = roomList[roomList.Count - 2];
+                Room tempRoom = new Room(shopRoom.x, shopRoom.y);
+                Destroy(shopRoom.gameObject);
+                var roomToRemove = roomList.Single( r => r.x  == tempRoom.x && r.y == tempRoom.y);
+                roomList.Remove(roomToRemove);
+                LoadRoom("Shop", tempRoom.x, tempRoom.y);
         }
 
     }

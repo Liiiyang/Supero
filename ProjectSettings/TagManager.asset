@@ -11,6 +11,8 @@ TagManager:
   - boss
   - portal
   - bossRoom
+  - start
+  - normal
   layers:
   - Default
   - TransparentFX

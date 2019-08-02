@@ -11,6 +11,13 @@ public class Room : MonoBehaviour
 
     public bool destroySpawns = false;
 
+    public Collider2D col_bottom;
+    public Collider2D col_left;
+    public Collider2D col_up;
+    public Collider2D col_right;
+
+    public GameObject leftwall, rightwall, topwall, bottomwall;
+
     public Room(int x1, int y1)
     {
         x = x1;
@@ -49,19 +56,33 @@ public class Room : MonoBehaviour
             }
 
         }
-        RoomController.instance.RegisterRoom(this);
-        
+        RoomController.instance.RegisterRoom(this);   
     }
 
     void Update()
     {
-        if (name.Contains("Boss") && !updatedDoors)
+        
+
+        if (name.Contains("Shop") && !updatedDoors)
         {
             RemoveUnconnectedDoors();
             updatedDoors = true;
         }
 
-        if (name.Contains("Shop") && !updatedDoors)
+        StartCoroutine(BossRemoveDoor());
+
+        //Debug.Log(gameObject.name.ToString() + "Leftwall x: " + leftwall.transform.position.x.ToString() + " Leftwall y: " + leftwall.transform.position.y.ToString());
+        //Debug.Log(leftwall.transform.position.x.GetType());
+
+        
+
+        
+    }
+
+    IEnumerator BossRemoveDoor()
+    {
+        yield return new WaitForSeconds(1);
+        if (name.Contains("Boss") && !updatedDoors)
         {
             RemoveUnconnectedDoors();
             updatedDoors = true;
@@ -76,19 +97,31 @@ public class Room : MonoBehaviour
             {
                 case Door.DoorType.left:
                     if (GetLeft() == null)
+                    {
                         door.gameObject.SetActive(false);
+                        col_left.isTrigger = false;
+                    }
                     break;
                 case Door.DoorType.right:
                     if (GetRight() == null)
+                    {
                         door.gameObject.SetActive(false);
+                        col_right.isTrigger = false;
+                    }
                     break;
                 case Door.DoorType.top:
                     if (GetTop() == null)
+                    {
                         door.gameObject.SetActive(false);
+                        col_up.isTrigger = false;
+                    }
                     break;
                 case Door.DoorType.bottom:
                     if (GetBottom() == null)
+                    {
                         door.gameObject.SetActive(false);
+                        col_bottom.isTrigger = false;
+                    }
                     break;
             }
         }

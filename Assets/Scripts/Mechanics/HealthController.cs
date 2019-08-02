@@ -113,6 +113,13 @@ public class HealthController : MonoBehaviour
 
             player.GetComponent<HealthController>().isBossDead = true;
 
+            var bossRoom = GameObject.FindWithTag("bossRoom").GetComponent<StageController>();
+
+            bossRoom.col_bottom.isTrigger = true;
+            bossRoom.col_up.isTrigger = true;
+            bossRoom.col_left.isTrigger = true;
+            bossRoom.col_right.isTrigger = true;
+
             
         }
         else
