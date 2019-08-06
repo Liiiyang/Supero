@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Controls the Health of Player, Enemy and Boss
 public class HealthController : MonoBehaviour
@@ -9,12 +10,16 @@ public class HealthController : MonoBehaviour
 
     public GameObject[] oldgameObjects;
     public GameObject[] savedGameObjects;
+    public bool isBossDead;
+    public Color fullHealthColor = Color.red;
+    public Color zeroHealthColor = Color.gray;  
+    public Slider slider; 
+    public Image FillImage;
+    public int currentExp, totalExp,expGained;
 
     private float currentHealth;
     private bool isDead;
     private bool saved = false;
-
-    public bool isBossDead;
     private GameObject camera;
 
     Vector3 startPos;
@@ -24,14 +29,16 @@ public class HealthController : MonoBehaviour
         if (gameObject.tag == "enemy")
         {
             initialHealth = 50f;
+            expGained = 10;
         }
         else if (gameObject.tag == "boss")
         {
             initialHealth = 50f;
+            expGained = 550;
         }
         else if (gameObject.tag == "Player")
         {
-            initialHealth = 70f;
+            initialHealth = 100f;
         }
 
         
@@ -43,6 +50,8 @@ public class HealthController : MonoBehaviour
         currentHealth = initialHealth;
         Debug.Log(gameObject.name + " Starting Health: " + currentHealth.ToString());
         isBossDead = false;
+        totalExp = 500;
+        currentExp = 0;
     }
 
     void Update()
@@ -55,8 +64,21 @@ public class HealthController : MonoBehaviour
             StartCoroutine(stopSaving());
         }
 
+        if (currentExp >= totalExp)
+        {
+            currentExp -= totalExp;
+            totalExp += 50;
+            initialHealth += 50f;
+        }
 
-       
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            if (gameObject.tag == "Player")
+            {
+                currentExp += 550;
+            }
+
+        }
     }
 
     IEnumerator stopSaving()
@@ -69,21 +91,31 @@ public class HealthController : MonoBehaviour
     {
         currentHealth = initialHealth;
         isDead = false;
+        SetHealthUI();
         
+    }
+
+    private void SetHealthUI()
+    {
+        // Adjust the value and colour of the slider.
+        slider.value = currentHealth;
+        FillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, currentHealth / initialHealth);
     }
 
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
-        Debug.Log(gameObject.name + " current Health: " + currentHealth.ToString());
-
+        //Debug.Log(gameObject.name + " current Health: " + currentHealth.ToString());
+        SetHealthUI();
         if (currentHealth <= 0f && !isDead)
         {
 
             OnDeath();
+            
         }
 
     }
+
 
     private void OnDeath()
     {
@@ -92,15 +124,24 @@ public class HealthController : MonoBehaviour
         {
             for (var i = 0; i < oldgameObjects.Length; i++)
             {
-                savedGameObjects[i].SetActive(false);
+                if (savedGameObjects[i] != null)
+                {
+                    savedGameObjects[i].SetActive(false);
+                }               
             }
+            currentHealth = initialHealth;
+            SetHealthUI();
             camera = GameObject.Find("Main Camera");
             camera.GetComponent<CameraController>().reset(true);
             transform.position = startPos;
             for (var i = 0; i < savedGameObjects.Length; i++)
             {
-                savedGameObjects[i].SetActive(true);
+                if (savedGameObjects[i] != null)
+                {
+                    savedGameObjects[i].SetActive(true);
+                }               
             } 
+
         }
         else if (gameObject.tag == "boss")
         {
@@ -108,6 +149,7 @@ public class HealthController : MonoBehaviour
             //If boss dies, despawn and send bool to player so he can toggle checkpoint again to 
             //go next stage
             gameObject.SetActive(false);
+            currentExp += expGained;
 
             var player = GameObject.Find("Player");
 
@@ -124,8 +166,11 @@ public class HealthController : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false);
-
+            if (gameObject != null)
+            {
+                gameObject.SetActive(false);
+                currentExp += expGained;
+            }
         }
         
     }

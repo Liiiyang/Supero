@@ -31,17 +31,6 @@ public class GridController : MonoBehaviour
         
     }
 
-
-    IEnumerator DelaySpawns()
-    {
-        yield return new WaitForSeconds(2);
-        if (gameObject.tag != "bossRoom")
-        {
-            GeneratedGrid();
-        }
-        
-    }
-
     void Update()
     {
         if (GetComponentInParent<ObjectGenerator>().spawning && !StopSpawning)
@@ -51,11 +40,21 @@ public class GridController : MonoBehaviour
             {
                 GeneratedGrid();
                 StopSpawning = true;
-            }
-            
+            }           
         }
         
     }
+
+    IEnumerator DelaySpawns()
+    {
+        yield return new WaitForSeconds(2);
+        if (gameObject.tag != "bossRoom")
+        {
+            GeneratedGrid();
+        }
+
+    }
+
     public void GeneratedGrid()
     {
         grid.verticalOffset += room.transform.localPosition.y;

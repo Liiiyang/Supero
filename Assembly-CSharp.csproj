@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\Enemies\EnemyList.cs" />
      <Compile Include="Assets\Scripts\Items\obstaclesList.cs" />
      <Compile Include="Assets\Scripts\Mechanics\AttackController.cs" />
+     <Compile Include="Assets\Scripts\Mechanics\GameManager.cs" />
      <Compile Include="Assets\Scripts\Mechanics\HealthController.cs" />
      <Compile Include="Assets\Scripts\Mechanics\ObjectData.cs" />
      <Compile Include="Assets\Scripts\Mechanics\ObjectGenerator.cs" />

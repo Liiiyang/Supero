@@ -7,9 +7,11 @@ public class DungeonGenerator : MonoBehaviour
 {
     public DungeonData dungeonData;
 
-    public DungeonData olddungeonData;
-
+    public bool spawnNewMap = false;
     private List<Vector2Int> dungeonRooms;
+    private float spawnTimer = 0.0f;
+    private const float stopTimer = 0.01f;
+    
     
     
 
@@ -18,9 +20,8 @@ public class DungeonGenerator : MonoBehaviour
         dungeonRooms = DungeonController.GenerateDungeon(dungeonData);
         
         createRooms(dungeonRooms);
-
-        
     }
+
     private void createRooms(IEnumerable<Vector2Int> rooms)
     {
         RoomController.instance.LoadRoom("Start", 0, 0);

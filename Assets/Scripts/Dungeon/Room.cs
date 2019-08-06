@@ -18,6 +18,10 @@ public class Room : MonoBehaviour
 
     public GameObject leftwall, rightwall, topwall, bottomwall;
 
+    public GameObject leftDoorh, rightDoorh, topDoorh, bottomDoorh;
+
+    private GameObject leftRoom, rightRoom,topRoom,bottomRoom;
+
     public Room(int x1, int y1)
     {
         x = x1;
@@ -26,6 +30,14 @@ public class Room : MonoBehaviour
 
     public List<Door> doors = new List<Door>();
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        leftDoorh.SetActive(false);
+        rightDoorh.SetActive(false);
+        topDoorh.SetActive(false);
+        bottomDoorh.SetActive(false);
+    }
     void Start()
     {
         if (RoomController.instance == null)
@@ -61,15 +73,19 @@ public class Room : MonoBehaviour
 
     void Update()
     {
-        
 
-        if (name.Contains("Shop") && !updatedDoors)
+
+        if (name.Contains("Hidden") && !updatedDoors)
         {
+            hiddenDoors();
             RemoveUnconnectedDoors();
             updatedDoors = true;
+
+
         }
 
         StartCoroutine(BossRemoveDoor());
+        //StartCoroutine(ShopRemoveDoor());
 
         //Debug.Log(gameObject.name.ToString() + "Leftwall x: " + leftwall.transform.position.x.ToString() + " Leftwall y: " + leftwall.transform.position.y.ToString());
         //Debug.Log(leftwall.transform.position.x.GetType());
@@ -79,9 +95,19 @@ public class Room : MonoBehaviour
         
     }
 
+    IEnumerator ShopRemoveDoor()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (name.Contains("Shop") && !updatedDoors)
+        {
+            //RemoveUnconnectedDoors();
+            updatedDoors = true;
+        }
+    }
+
     IEnumerator BossRemoveDoor()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         if (name.Contains("Boss") && !updatedDoors)
         {
             RemoveUnconnectedDoors();
@@ -125,6 +151,53 @@ public class Room : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void hiddenDoors()
+    {
+        for (int i = 0; i < RoomController.instance.roomList.Count; i++)
+        {
+            if(!RoomController.instance.roomList[i].name.Contains("Boss"))
+            {
+                if (((x + 1 == RoomController.instance.roomList[i].x) && (y == RoomController.instance.roomList[i].y)))
+                {
+                    rightRoom = GameObject.Find(RoomController.instance.roomList[i].name);
+                    Debug.Log(RoomController.instance.roomList[i].name);
+                    rightRoom.GetComponent<Room>().leftDoorh.SetActive(true);
+                    rightRoom.transform.Find("leftDoorh").gameObject.GetComponent<Collider2D>().isTrigger = false;
+
+                }
+                else if (((x - 1 == RoomController.instance.roomList[i].x) && (y == RoomController.instance.roomList[i].y))
+    )
+                {
+                    leftRoom = GameObject.Find(RoomController.instance.roomList[i].name);
+                    Debug.Log(RoomController.instance.roomList[i].name);
+                    leftRoom.GetComponent<Room>().rightDoorh.SetActive(true); ;
+                    leftRoom.transform.Find("rightDoorh").gameObject.GetComponent<Collider2D>().isTrigger = false;
+
+                }
+                else if (((x == RoomController.instance.roomList[i].x) && (y + 1 == RoomController.instance.roomList[i].y))
+    )
+                {
+                    topRoom = GameObject.Find(RoomController.instance.roomList[i].name);
+                    Debug.Log(RoomController.instance.roomList[i].name);
+                    topRoom.GetComponent<Room>().bottomDoorh.SetActive(true);
+                    topRoom.transform.Find("bottomDoorh").gameObject.GetComponent<Collider2D>().isTrigger = false;
+
+                }
+                else if (((x == RoomController.instance.roomList[i].x) && (y - 1 == RoomController.instance.roomList[i].y))
+    )
+                {
+                    bottomRoom = GameObject.Find(RoomController.instance.roomList[i].name);
+                    Debug.Log(RoomController.instance.roomList[i].name);
+                    bottomRoom.GetComponent<Room>().topDoorh.SetActive(true);
+                    bottomRoom.transform.Find("topDoorh").gameObject.GetComponent<Collider2D>().isTrigger = false;
+
+                }
+            }
+           
+        }
+            
     }
 
     public Room GetLeft()

@@ -13,6 +13,11 @@ TagManager:
   - bossRoom
   - start
   - normal
+  - hiddenRoom
+  - rightDoorh
+  - leftDoorh
+  - topDoorh
+  - bottomDoorh
   layers:
   - Default
   - TransparentFX
@@ -70,4 +75,7 @@ TagManager:
     locked: 0
   - name: portal
     uniqueID: 3871369321
+    locked: 0
+  - name: hDoor
+    uniqueID: 802424613
     locked: 0
