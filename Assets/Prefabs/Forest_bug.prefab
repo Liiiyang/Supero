@@ -1008,10 +1008,10 @@ GameObject:
   m_Component:
   - component: {fileID: 9010702183438876177}
   - component: {fileID: 9010702183438876176}
-  - component: {fileID: 6496418789461630154}
-  - component: {fileID: 3817254023412070623}
   - component: {fileID: 482485246031316160}
   - component: {fileID: 5672747543236828812}
+  - component: {fileID: 6496418789461630154}
+  - component: {fileID: 3817254023412070623}
   m_Layer: 8
   m_Name: Forest_bug
   m_TagString: enemy
@@ -1084,50 +1084,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6496418789461630154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9010702183438876179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10407334c5bc18e4cb066e7ee73dca47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialHealth: 0
-  oldgameObjects: []
-  savedGameObjects: []
-  isBossDead: 0
-  fullHealthColor: {r: 1, g: 0, b: 0, a: 1}
-  zeroHealthColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  slider: {fileID: 929102425587298688}
-  FillImage: {fileID: 3496997689787009913}
---- !u!114 &3817254023412070623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9010702183438876179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20ff43197460f3342aabdd80485c266e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDamage: 0
-  attackPos: {fileID: 4485890716018355766}
-  designatedEnemy:
-    serializedVersion: 2
-    m_Bits: 512
-  attackRange: 1.5
-  totalStamina: 5
-  currentStamina: 0
-  fullStaminaColor: {r: 0, g: 1, b: 0, a: 1}
-  zeroStaminaColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  slider: {fileID: 8889035207319320606}
-  FillImage: {fileID: 1862634245918957517}
 --- !u!50 &482485246031316160
 Rigidbody2D:
   serializedVersion: 4
@@ -1175,3 +1131,43 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6807704, y: 1.4466131}
   m_EdgeRadius: 0
+--- !u!114 &6496418789461630154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9010702183438876179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10407334c5bc18e4cb066e7ee73dca47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oldgameObjects: []
+  savedGameObjects: []
+  isBossDead: 0
+  fullHealthColor: {r: 1, g: 0, b: 0, a: 1}
+  zeroHealthColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  slider: {fileID: 929102425587298688}
+  FillImage: {fileID: 3496997689787009913}
+--- !u!114 &3817254023412070623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9010702183438876179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ff43197460f3342aabdd80485c266e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPos: {fileID: 4485890716018355766}
+  attackRange: 1
+  designatedEnemy:
+    serializedVersion: 2
+    m_Bits: 512
+  fullStaminaColor: {r: 0, g: 1, b: 0, a: 1}
+  zeroStaminaColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  slider: {fileID: 8889035207319320606}
+  FillImage: {fileID: 1862634245918957517}

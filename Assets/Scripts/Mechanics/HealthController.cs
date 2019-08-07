@@ -13,15 +13,16 @@ public class HealthController : MonoBehaviour
     public Color zeroHealthColor = Color.gray;  
     public Slider slider; 
     public Image FillImage;
+    public GameObject ghost;
+    public bool oddDeaths;
 
-    private int currentExp, totalExp,expGained;
+    private int totalExp,expGained, currency_e, currency_b;
     private float currentHealth,initialHealth;
     private bool isDead;
     private bool saved = false;
-    private GameObject camera;
-    private GameObject gameManager;
+    private GameObject camera,gameManager,deadPoint;
     private GameManager gm;
-
+    
     Vector3 startPos;
 
     void Awake()
@@ -32,17 +33,18 @@ public class HealthController : MonoBehaviour
         {
             initialHealth = gm.initialHealth_e;
             expGained = gm.expGained_e;
+            currency_e = gm.currency_e;
         }
         else if (gameObject.tag == "boss")
         {
             initialHealth = gm.initialHealth_b;
             expGained = gm.expGained_b;
+            currency_b = gm.currency_b;
         }
         else if (gameObject.tag == "Player")
         {
             initialHealth = gm.initialHealth_p;
             totalExp = gm.totalExp;
-            currentExp = gm.currentExp;
         }
 
         
@@ -52,6 +54,7 @@ public class HealthController : MonoBehaviour
     {
         startPos = transform.position;
         currentHealth = initialHealth;
+        oddDeaths = false;
         Debug.Log(gameObject.name + " Starting Health: " + currentHealth.ToString());
         isBossDead = false;
     }
@@ -70,7 +73,8 @@ public class HealthController : MonoBehaviour
         {
             if (gameObject.tag == "Player")
             {
-                currentExp += 550;
+                gm.currentExp += 550;
+                gm.currency_p += 200;
             }
 
         }
@@ -104,11 +108,8 @@ public class HealthController : MonoBehaviour
         SetHealthUI();
         if (currentHealth <= 0f && !isDead)
         {
-
-            OnDeath();
-            
+            OnDeath();           
         }
-
     }
 
 
@@ -117,6 +118,7 @@ public class HealthController : MonoBehaviour
         //If its the player, respawn back to start point, else just deactivate it
         if (gameObject.tag == "Player")
         {
+            //Debug.Log("Death Point: X" + transform.position.x.ToString() + " Y: " + transform.position.y.ToString());
             for (var i = 0; i < oldgameObjects.Length; i++)
             {
                 if (savedGameObjects[i] != null)
@@ -126,6 +128,25 @@ public class HealthController : MonoBehaviour
             }
             currentHealth = initialHealth;
             SetHealthUI();
+
+            if (!oddDeaths)
+            {
+                deadPoint = Instantiate(ghost, transform.position, Quaternion.identity) as GameObject;
+                oddDeaths = true;
+                gm.saved_currency = gm.currency_p;
+                gm.currency_p = 0;
+            }
+            else
+            {
+                oddDeaths = false;
+                if (deadPoint != null)
+                {
+                    Destroy(deadPoint);
+                    gm.saved_currency = 0;
+                }                
+            }
+            
+
             camera = GameObject.Find("Main Camera");
             camera.GetComponent<CameraController>().reset(true);
             transform.position = startPos;
@@ -144,7 +165,8 @@ public class HealthController : MonoBehaviour
             //If boss dies, despawn and send bool to player so he can toggle checkpoint again to 
             //go next stage
             gameObject.SetActive(false);
-            currentExp += expGained;
+            gm.currentExp += expGained;
+            gm.currency_p += currency_b;
 
             var player = GameObject.Find("Player");
 
@@ -164,7 +186,8 @@ public class HealthController : MonoBehaviour
             if (gameObject != null)
             {
                 gameObject.SetActive(false);
-                currentExp += expGained;
+                gm.currentExp += expGained;
+                gm.currency_p += currency_e;
             }
         }
         

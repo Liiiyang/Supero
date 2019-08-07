@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class AttackController : MonoBehaviour
 {
     public Transform attackPos;
+    public float attackRange;
     public LayerMask designatedEnemy;
     public Color fullStaminaColor = Color.green;
     public Color zeroStaminaColor = Color.gray;
@@ -15,7 +16,7 @@ public class AttackController : MonoBehaviour
 
     private float stamina,regenRate;
     private float attackDamage;
-    private float attackRange, totalStamina, currentStamina;
+    private float totalStamina, currentStamina;
     private string attack_button;
     private float StaminaRegenTimer = 0.0f;
     private const float StaminaTimeToRegen = 3.0f;

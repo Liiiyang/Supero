@@ -18,6 +18,7 @@ TagManager:
   - leftDoorh
   - topDoorh
   - bottomDoorh
+  - ghost
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - 
   - enemy
   - player
-  - 
+  - chest
   - 
   - 
   - 

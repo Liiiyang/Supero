@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public float stamina_p, stamina_e, stamina_b;
     public float regenRate_p, regenRate_e, regenRate_b;
     public float attackDamage_p, attackDamage_e,attackDamage_b;
+    public int currency_p, currency_e, currency_b, saved_currency;
 
     private GameObject[] resetEnemies, resetObstacles;
     private GameObject player;
@@ -44,16 +45,17 @@ public class GameManager : MonoBehaviour
         attackDamage_b = 0.01f;
         stamina_b = 50f;
         regenRate_b = 0.1f;
+
+        currency_p = 0;
+        saved_currency = 0;
+        currency_e = 100;
+        currency_b = 1000;
     }
     // Start is called before the first frame update
     void Start()
     {
         stage = 1;
         player = GameObject.Find("Player");
-
-
-
-
     }
 
     // Update is called once per frame
@@ -73,8 +75,6 @@ public class GameManager : MonoBehaviour
                 }
 
             }
-
-
 
             for (var i = 0; i < resetObstacles.Length; i++)
             {
@@ -109,7 +109,8 @@ public class GameManager : MonoBehaviour
             stamina_b += 50f;
             regenRate_b += 0.1f;
 
-
+            currency_e += 20;
+            currency_b += 200;
         }
 
         if (currentExp >= totalExp)
@@ -121,9 +122,7 @@ public class GameManager : MonoBehaviour
             totalStamina_p += 50f;
             attackDamage_p += 20f;
             stamina_p += 50f;
-            regenRate_p += 10f;
-
-            
+            regenRate_p += 10f;           
         }
         
     }
