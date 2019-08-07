@@ -12,3 +12,4 @@
  * Health, Stamina, damage, exp scaling
  * Renamed StageController to PortalController
  * Exp fully functional
+ * Currency Mechanics fully functional
