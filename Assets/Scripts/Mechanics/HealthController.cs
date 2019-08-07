@@ -6,8 +6,6 @@ using UnityEngine.UI;
 //Controls the Health of Player, Enemy and Boss
 public class HealthController : MonoBehaviour
 {
-    public float initialHealth;
-
     public GameObject[] oldgameObjects;
     public GameObject[] savedGameObjects;
     public bool isBossDead;
@@ -15,30 +13,36 @@ public class HealthController : MonoBehaviour
     public Color zeroHealthColor = Color.gray;  
     public Slider slider; 
     public Image FillImage;
-    public int currentExp, totalExp,expGained;
 
-    private float currentHealth;
+    private int currentExp, totalExp,expGained;
+    private float currentHealth,initialHealth;
     private bool isDead;
     private bool saved = false;
     private GameObject camera;
+    private GameObject gameManager;
+    private GameManager gm;
 
     Vector3 startPos;
 
     void Awake()
     {
+        gameManager = GameObject.Find("GameManager");
+        gm = gameManager.GetComponent<GameManager>();
         if (gameObject.tag == "enemy")
         {
-            initialHealth = 50f;
-            expGained = 10;
+            initialHealth = gm.initialHealth_e;
+            expGained = gm.expGained_e;
         }
         else if (gameObject.tag == "boss")
         {
-            initialHealth = 50f;
-            expGained = 550;
+            initialHealth = gm.initialHealth_b;
+            expGained = gm.expGained_b;
         }
         else if (gameObject.tag == "Player")
         {
-            initialHealth = 100f;
+            initialHealth = gm.initialHealth_p;
+            totalExp = gm.totalExp;
+            currentExp = gm.currentExp;
         }
 
         
@@ -50,8 +54,6 @@ public class HealthController : MonoBehaviour
         currentHealth = initialHealth;
         Debug.Log(gameObject.name + " Starting Health: " + currentHealth.ToString());
         isBossDead = false;
-        totalExp = 500;
-        currentExp = 0;
     }
 
     void Update()
@@ -62,13 +64,6 @@ public class HealthController : MonoBehaviour
             oldgameObjects = GameObject.FindGameObjectsWithTag("enemy");
             savedGameObjects = GameObject.FindGameObjectsWithTag("enemy");
             StartCoroutine(stopSaving());
-        }
-
-        if (currentExp >= totalExp)
-        {
-            currentExp -= totalExp;
-            totalExp += 50;
-            initialHealth += 50f;
         }
 
         if (Input.GetKeyDown(KeyCode.U))
@@ -155,7 +150,7 @@ public class HealthController : MonoBehaviour
 
             player.GetComponent<HealthController>().isBossDead = true;
 
-            var bossRoom = GameObject.FindWithTag("bossRoom").GetComponent<StageController>();
+            var bossRoom = GameObject.FindWithTag("bossRoom").GetComponent<PortalController>();
 
             bossRoom.col_bottom.isTrigger = true;
             bossRoom.col_up.isTrigger = true;

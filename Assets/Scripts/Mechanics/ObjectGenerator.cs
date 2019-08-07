@@ -19,11 +19,11 @@ public class ObjectGenerator : MonoBehaviour
     public ObjectSpawner[] objectData;
     public bool spawning;
 
-    public StageController sc;
+    public PortalController pc;
 
     void Awake()
     {
-        sc = GetComponent<StageController>();
+        pc = GetComponent<PortalController>();
     }
     void Start()
     {
@@ -33,7 +33,7 @@ public class ObjectGenerator : MonoBehaviour
 
     void Update()
     {
-        spawning = sc.spawnBoss;
+        spawning = pc.spawnBoss;
         if (spawning)
         {
             Debug.Log("True");

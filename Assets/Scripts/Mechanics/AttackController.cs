@@ -6,45 +6,47 @@ using UnityEngine.UI;
 //Controls the Attack of Player, Enemy and Boss, also accounts for stamina
 public class AttackController : MonoBehaviour
 {
-    public float attackDamage;
-
     public Transform attackPos;
     public LayerMask designatedEnemy;
-    public float attackRange,totalStamina,currentStamina;
-
     public Color fullStaminaColor = Color.green;
     public Color zeroStaminaColor = Color.gray;
     public Slider slider;
     public Image FillImage; 
 
     private float stamina,regenRate;
+    private float attackDamage;
+    private float attackRange, totalStamina, currentStamina;
     private string attack_button;
-
     private float StaminaRegenTimer = 0.0f;
     private const float StaminaTimeToRegen = 3.0f;
 
+    private GameObject gameManager;
+    private GameManager gm;
+
     void Awake()
     {
+        gameManager = GameObject.Find("GameManager");
+        gm = gameManager.GetComponent<GameManager>();
         if (gameObject.tag == "enemy")
         {
-            attackDamage = 5f;
-            stamina = 5f;
-            totalStamina = 5f; 
-            regenRate = 0.01f;
+            attackDamage = gm.attackDamage_e;
+            stamina = gm.stamina_e;
+            totalStamina = gm.totalStamina_e; 
+            regenRate = gm.regenRate_e;
         }
         else if (gameObject.tag == "boss")
         {
-            attackDamage = 0.01f;
-            stamina = 50f;
-            totalStamina = 50f;
-            regenRate = 0.1f;
+            attackDamage = gm.attackDamage_b;
+            stamina = gm.stamina_b;
+            totalStamina = gm.totalStamina_b;
+            regenRate = gm.regenRate_b;
         }
         else if (gameObject.tag == "Player")
         {
-            attackDamage = 50f;
-            stamina = 40f;
-            totalStamina = 100f;
-            regenRate = 10f;
+            attackDamage = gm.attackDamage_p;
+            stamina = gm.stamina_p;
+            totalStamina = gm.totalStamina_p;
+            regenRate = gm.regenRate_p;
         }
     }
     void Start()
