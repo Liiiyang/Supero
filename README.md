@@ -18,3 +18,4 @@
  * Potions Mechanics fully functional
  * Currency Mechanics bug fixed
  * Currency and Potions UI functional
+ * Added Shopkeeper
