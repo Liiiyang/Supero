@@ -13,3 +13,8 @@
  * Renamed StageController to PortalController
  * Exp fully functional
  * Currency Mechanics fully functional
+ 
+ 08/08/2019
+ * Potions Mechanics fully functional
+ * Currency Mechanics bug fixed
+ * Currency and Potions UI functional
