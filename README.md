@@ -19,3 +19,5 @@
  * Currency Mechanics bug fixed
  * Currency and Potions UI functional
  * Added Shopkeeper
+ * Mob animations and movement functional
+ * Player movement corrected
