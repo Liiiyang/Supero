@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private int x, y;
     private GameManager gm;
     private HealthController hc;
+    private bool facingRight;
 
     void Start()
     {
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
         attack_button = "Attack";
         action_button = "Action";
         heal_button = "Heal";
+        facingRight = true;
     }
 
     void Update()
@@ -108,7 +110,20 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb2d.MovePosition(rb2d.position + moveVelocity * Time.fixedDeltaTime);        
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        rb2d.MovePosition(rb2d.position + moveVelocity * Time.fixedDeltaTime);
+        Flip(moveHorizontal);      
+    }
+
+    private void Flip(float horizontal)
+    {
+        if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
+        {
+            facingRight = !facingRight;
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+        }
     }
 
     void OnCollisionStay2D(Collision2D other)

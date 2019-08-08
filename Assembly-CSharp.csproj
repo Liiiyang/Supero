@@ -63,7 +63,12 @@
      <Compile Include="Assets\Scripts\Dungeon\GridController.cs" />
      <Compile Include="Assets\Scripts\Dungeon\Room.cs" />
      <Compile Include="Assets\Scripts\Dungeon\RoomController.cs" />
+     <Compile Include="Assets\Scripts\Enemies\AttackBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\DesertController.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyList.cs" />
+     <Compile Include="Assets\Scripts\Enemies\FollowBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\IdleBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\WalkBehaviour.cs" />
      <Compile Include="Assets\Scripts\Items\chestController.cs" />
      <Compile Include="Assets\Scripts\Items\obstaclesList.cs" />
      <Compile Include="Assets\Scripts\Mechanics\AttackController.cs" />

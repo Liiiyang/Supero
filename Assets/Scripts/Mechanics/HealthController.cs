@@ -152,7 +152,7 @@ public class HealthController : MonoBehaviour
                 {
                     Destroy(deadPoint);
                     deadPoint = Instantiate(ghost, transform.position, Quaternion.identity) as GameObject;
-                    gm.saved_currency = 0;
+                    gm.saved_currency = gm.currency_p;
                     gm.currency_p = 0;
                     gm.current_currency = 0;
                     oddDeaths = false;
@@ -188,9 +188,7 @@ public class HealthController : MonoBehaviour
             bossRoom.col_bottom.isTrigger = true;
             bossRoom.col_up.isTrigger = true;
             bossRoom.col_left.isTrigger = true;
-            bossRoom.col_right.isTrigger = true;
-
-            
+            bossRoom.col_right.isTrigger = true;           
         }
         else
         {
