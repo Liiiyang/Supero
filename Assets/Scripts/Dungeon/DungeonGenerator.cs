@@ -2,22 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class DungeonGenerator : MonoBehaviour
 {
     public DungeonData dungeonData;
 
-    public bool spawnNewMap = false;
     private List<Vector2Int> dungeonRooms;
-    private const float stopTimer = 0.01f;
-    
+
     private void Start()
     {
         dungeonRooms = DungeonController.GenerateDungeon(dungeonData);
-        
-        createRooms(dungeonRooms);
+        createRooms(dungeonRooms);       
     }
-
     private void createRooms(IEnumerable<Vector2Int> rooms)
     {
         RoomController.instance.LoadRoom("Start", 0, 0);

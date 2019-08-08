@@ -5,20 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Door
-  - stage
-  - enemy
-  - obstacle
-  - boss
-  - portal
-  - bossRoom
-  - start
-  - normal
-  - hiddenRoom
-  - rightDoorh
-  - leftDoorh
-  - topDoorh
-  - bottomDoorh
-  - ghost
+  - MoveSpot
+  - Room
   layers:
   - Default
   - TransparentFX
@@ -28,9 +16,9 @@ TagManager:
   - UI
   - 
   - 
-  - enemy
-  - player
-  - chest
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -70,13 +58,4 @@ TagManager:
     locked: 0
   - name: Obstacles
     uniqueID: 2514765755
-    locked: 0
-  - name: boss_props
-    uniqueID: 2100732513
-    locked: 0
-  - name: portal
-    uniqueID: 3871369321
-    locked: 0
-  - name: hDoor
-    uniqueID: 802424613
     locked: 0
