@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rangeToPlayer: 7
-  fieldOfViewLeft: 150
-  fieldOfViewRight: 30
   speed: 7
 --- !u!1102 &-7464671717679196252
 AnimatorState:
@@ -177,8 +175,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startWaitTime: 0
   rangeToPlayer: 0
-  fieldOfViewLeft: 0
-  fieldOfViewRight: 0
 --- !u!114 &-3474178417386461188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -205,8 +201,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startWaitTime: 3
   rangeToPlayer: 7
-  fieldOfViewLeft: 150
-  fieldOfViewRight: 30
 --- !u!1101 &-2626442887668117324
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
