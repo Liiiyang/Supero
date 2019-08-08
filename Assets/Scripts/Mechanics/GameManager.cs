@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public float attackDamage_p, attackDamage_e,attackDamage_b;
     public int currency_p, currency_e, currency_b, saved_currency, current_currency;
     public bool rebuild = false;
-    public int currentPotions, maxPotions;
+    public int currentPotions;
 
     private GameObject[] resetEnemies, resetObstacles;
     private GameObject player;
@@ -56,10 +56,9 @@ public class GameManager : MonoBehaviour
         currency_e = 100;
         currency_b = 1000;
 
-        maxPotions = 5;
+        currentPotions = 5;
         regenHealth = 100f;
         currentHealth = initialHealth_p;
-        currentPotions = maxPotions;
     }
     // Start is called before the first frame update
     void Start()
@@ -122,7 +121,7 @@ public class GameManager : MonoBehaviour
             currency_e += 20;
             currency_b += 200;
 
-            maxPotions += 2;
+            currentPotions += 2;
             regenHealth -= 30;
         }
 

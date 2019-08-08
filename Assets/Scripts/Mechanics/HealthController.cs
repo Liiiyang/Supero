@@ -130,7 +130,6 @@ public class HealthController : MonoBehaviour
             }
             currentHealth = initialHealth;
             gm.currentHealth = currentHealth;
-            gm.currentPotions = gm.maxPotions;
             SetHealthUI();
 
             // Leaves behind a ghost sprite when player dies

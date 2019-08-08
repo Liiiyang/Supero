@@ -153,5 +153,11 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponent<HealthController>().oddDeaths = false;
             gm.currency_p += gm.saved_currency;
         }
+
+        if (Input.GetButtonDown(action_button) && other.gameObject.name == "shopkeeper")
+        {
+            //Activate Shop Menu
+            Debug.Log("Shop Activated");
+        }
     }    
 }
