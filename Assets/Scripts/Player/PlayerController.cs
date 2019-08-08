@@ -11,19 +11,23 @@ public class PlayerController : MonoBehaviour
     public GameObject chest;
     private Rigidbody2D rb2d;
     private Vector2 moveVelocity;
-    private string attack_button, action_button;
-    private GameObject hiddenRoom, gameManager;
+    private string attack_button, action_button, heal_button;
+    private GameObject hiddenRoom, gameManager, player;
     private GameObject rightRoom,leftRoom, topRoom, bottomRoom;
     private int x, y;
     private GameManager gm;
+    private HealthController hc;
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         gameManager = GameObject.Find("GameManager");
         gm = gameManager.GetComponent<GameManager>();
+        player = GameObject.Find("Player");
+        hc = player.GetComponent<HealthController>();
         attack_button = "Attack";
         action_button = "Action";
+        heal_button = "Heal";
     }
 
     void Update()
@@ -52,6 +56,26 @@ public class PlayerController : MonoBehaviour
             x = int.Parse(coordinates[0].Value);
             y = int.Parse(coordinates[1].Value);
             StartCoroutine(FindCorrectRoom());
+        }
+
+        if (Input.GetButtonDown(heal_button))
+        {
+            if (gm.currentPotions != 0)
+            {
+                gm.currentPotions -= 1;
+                if ((gm.initialHealth_p - gm.currentHealth) > gm.regenHealth)
+                {
+                    gm.currentHealth += gm.regenHealth;
+                    hc.SetHealthUI();
+                }
+                else
+                {
+                    gm.currentHealth = gm.initialHealth_p;
+                    hc.SetHealthUI();
+                }
+
+            }
+            
         }
     }
 
@@ -127,8 +151,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);
             gameObject.GetComponent<HealthController>().oddDeaths = false;
-            gm.currency_p = gm.saved_currency;
+            gm.currency_p += gm.saved_currency;
         }
-
     }    
 }

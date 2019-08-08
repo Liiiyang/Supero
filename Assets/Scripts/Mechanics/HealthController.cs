@@ -23,6 +23,7 @@ public class HealthController : MonoBehaviour
     private GameObject camera,gameManager,deadPoint;
     private GameManager gm;
     
+    
     Vector3 startPos;
 
     void Awake()
@@ -86,6 +87,13 @@ public class HealthController : MonoBehaviour
         saved = true;
     }
 
+    public void SetHealthUI()
+    {
+        // Adjust the value and colour of the slider.
+        slider.value = gm.currentHealth;
+        FillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, gm.currentHealth / initialHealth);
+    }
+
     private void OnEnable()
     {
         currentHealth = initialHealth;
@@ -94,16 +102,10 @@ public class HealthController : MonoBehaviour
         
     }
 
-    private void SetHealthUI()
-    {
-        // Adjust the value and colour of the slider.
-        slider.value = currentHealth;
-        FillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, currentHealth / initialHealth);
-    }
-
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
+        gm.currentHealth = currentHealth;
         //Debug.Log(gameObject.name + " current Health: " + currentHealth.ToString());
         SetHealthUI();
         if (currentHealth <= 0f && !isDead)
@@ -127,26 +129,36 @@ public class HealthController : MonoBehaviour
                 }               
             }
             currentHealth = initialHealth;
+            gm.currentHealth = currentHealth;
+            gm.currentPotions = gm.maxPotions;
             SetHealthUI();
 
+            // Leaves behind a ghost sprite when player dies
             if (!oddDeaths)
             {
-                deadPoint = Instantiate(ghost, transform.position, Quaternion.identity) as GameObject;
-                oddDeaths = true;
-                gm.saved_currency = gm.currency_p;
-                gm.currency_p = 0;
-            }
-            else
-            {
-                oddDeaths = false;
                 if (deadPoint != null)
                 {
                     Destroy(deadPoint);
-                    gm.saved_currency = 0;
-                }                
-            }
-            
+                }
+                deadPoint = Instantiate(ghost, transform.position, Quaternion.identity) as GameObject;
+                gm.saved_currency = gm.currency_p;
+                gm.currency_p = 0;
+                gm.current_currency = 0;
+                oddDeaths = true;
 
+            }
+            else
+            {
+                if (deadPoint != null)
+                {
+                    Destroy(deadPoint);
+                    deadPoint = Instantiate(ghost, transform.position, Quaternion.identity) as GameObject;
+                    gm.saved_currency = 0;
+                    gm.currency_p = 0;
+                    gm.current_currency = 0;
+                    oddDeaths = false;
+                }
+            }
             camera = GameObject.Find("Main Camera");
             camera.GetComponent<CameraController>().reset(true);
             transform.position = startPos;
