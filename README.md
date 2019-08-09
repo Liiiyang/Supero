@@ -21,3 +21,10 @@
  * Added Shopkeeper
  * Mob animations and movement functional
  * Player movement corrected
+ 
+ 09/08/2019
+ * Mob damage synced with attack animation
+ * Types of enemy spawn for each level functional
+ * UI Messages when player interact with the environment
+ * Player and Mob's health, stamina and damage output fine-tuned
+ 
