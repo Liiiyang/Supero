@@ -1053,7 +1053,9 @@ MonoBehaviour:
   initialHealth_e: 0
   initialHealth_b: 0
   regenHealth: 0
-  currentHealth: 0
+  currentHealth_p: 0
+  currentHealth_e: 0
+  currentHealth_b: 0
   currentExp: 0
   totalExp: 0
   expGained_e: 0
@@ -1927,7 +1929,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -2191,6 +2193,18 @@ MonoBehaviour:
   speed: 10
   activateChest: 0
   chest: {fileID: 8820015092966215424, guid: 565683f737d082d4c896bcf209a9460c, type: 3}
+  fullHealthColor: {r: 1, g: 0, b: 0, a: 1}
+  zeroHealthColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  slider: {fileID: 753320584}
+  FillImage: {fileID: 2023812770}
+  chestMessage: {fileID: 7040679772566717749, guid: 499351a92c263af4ba424df2a83fcf62,
+    type: 3}
+  currencyMessage: {fileID: 7040679772566717749, guid: 3b51fcdba1c3e63479f3e952834b4100,
+    type: 3}
+  hiddenMessage: {fileID: 7040679772566717749, guid: b7e9f88c3f538fb42a1bedb1dce3f60a,
+    type: 3}
+  shopMessage: {fileID: 7040679772566717749, guid: 83e2c0391efdd6e47b3850c5444fd63b,
+    type: 3}
 --- !u!212 &2031864798
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2336,6 +2350,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPos: {fileID: 844130130}
+  floatingText: {fileID: 2451841277611726405, guid: dff350f103b5d354fba17db6fe675762,
+    type: 3}
   attackRange: 1
   designatedEnemy:
     serializedVersion: 2
@@ -2361,6 +2377,11 @@ MonoBehaviour:
   col_up: {fileID: 2031864801}
   col_right: {fileID: 2031864801}
   spawnBoss: 0
+  portalMessage: {fileID: 7040679772566717749, guid: 25ba722af8b484046ba18ab3438ca17a,
+    type: 3}
+  portalMessageExit: {fileID: 7040679772566717749, guid: 16a18ae90ac11414886ad99ed4c98a49,
+    type: 3}
+  spawnPortalMessageOnce: 0
 --- !u!1 &2070187137
 GameObject:
   m_ObjectHideFlags: 0

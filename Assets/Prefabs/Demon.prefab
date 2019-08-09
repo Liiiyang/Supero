@@ -704,6 +704,8 @@ MonoBehaviour:
   col_up: {fileID: 2332585191587335656}
   col_right: {fileID: 2332585191587335656}
   spawnBoss: 0
+  portalMessage: {fileID: 0}
+  spawnPortalMessageOnce: 0
 --- !u!114 &4734409711564687443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,6 +725,8 @@ MonoBehaviour:
   zeroHealthColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   slider: {fileID: 4657887543396322075}
   FillImage: {fileID: 6472410045928322372}
+  ghost: {fileID: 0}
+  oddDeaths: 0
 --- !u!114 &6331246811946595098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -736,6 +740,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPos: {fileID: 3396900350286203853}
+  floatingText: {fileID: 2451841277611726405, guid: dff350f103b5d354fba17db6fe675762,
+    type: 3}
   attackRange: 1
   designatedEnemy:
     serializedVersion: 2

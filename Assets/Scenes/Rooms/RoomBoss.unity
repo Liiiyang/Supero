@@ -2375,7 +2375,7 @@ MonoBehaviour:
     objectData: {fileID: 11400000, guid: 8b05f4d609070f0489a3eb9299cc6857, type: 2}
     spawn: 0
   spawning: 0
-  sc: {fileID: 604153021}
+  pc: {fileID: 0}
 --- !u!114 &604153021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2388,11 +2388,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48ea40ee499f464fa55040d5d1714cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnBoss: 0
   col_bottom: {fileID: 604153006}
   col_left: {fileID: 604153009}
   col_up: {fileID: 604153011}
   col_right: {fileID: 604153010}
+  spawnBoss: 0
+  portalMessage: {fileID: 7040679772566717749, guid: 25ba722af8b484046ba18ab3438ca17a,
+    type: 3}
+  portalMessageExit: {fileID: 7040679772566717749, guid: 16a18ae90ac11414886ad99ed4c98a49,
+    type: 3}
+  spawnPortalMessageOnce: 0
 --- !u!1 &609883186
 GameObject:
   m_ObjectHideFlags: 0

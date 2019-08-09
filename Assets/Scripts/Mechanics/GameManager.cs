@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject roomController;
     public TextMeshProUGUI currencyText, potionText;
     public int stage;
-    public float initialHealth_p, initialHealth_e, initialHealth_b, regenHealth, currentHealth;
+    public float initialHealth_p, initialHealth_e, initialHealth_b, regenHealth, currentHealth_p, currentHealth_e, currentHealth_b;
     public int currentExp, totalExp, expGained_e, expGained_b, expGained_p;
     public float totalStamina_p,totalStamina_e,totalStamina_b;
     public float currentStamina_p, currentStamina_e, currentStamina_b;
@@ -25,40 +25,47 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        initialHealth_p = 100f;
+        initialHealth_p = 1000f;
         totalExp = 500;
         currentExp = 0;
 
-        initialHealth_e = 50f;
+        initialHealth_e = 73f;
         expGained_e = 10;
 
         initialHealth_b = 50f;
         expGained_b = 550;
 
-        totalStamina_p = 100f;
-        attackDamage_p = 50f;
-        stamina_p = 40f;
-        regenRate_p = 10f;
+        totalStamina_p = 93f;
+        attackDamage_p = 73f;
+        stamina_p = 19f;
+        regenRate_p = 40f;
 
-        totalStamina_e = 5f;
-        attackDamage_e = 5f;
-        stamina_e = 5f;
-        regenRate_e = 0.01f;
+        totalStamina_e = 400f;
+        attackDamage_e = 60f;
+        stamina_e = 60f;
+        regenRate_e = 30f;
 
-        totalStamina_b = 50f;
-        attackDamage_b = 0.01f;
-        stamina_b = 50f;
-        regenRate_b = 0.1f;
+        totalStamina_b = 1000f;
+        attackDamage_b = 80f;
+        stamina_b = 120f;
+        regenRate_b = 40f;
 
         currency_p = 0;
         current_currency = 0;
         saved_currency = 0;
         currency_e = 100;
-        currency_b = 1000;
+        currency_b = 2000;
 
         currentPotions = 5;
-        regenHealth = 100f;
-        currentHealth = initialHealth_p;
+        regenHealth = 250f;
+        currentHealth_p = initialHealth_p;
+        currentHealth_e = initialHealth_e;
+        currentHealth_b = initialHealth_b;
+
+        currentStamina_p = totalStamina_p;
+        currentStamina_e = totalStamina_e;
+        currentStamina_b = totalStamina_b;
+
     }
     // Start is called before the first frame update
     void Start()
@@ -74,8 +81,11 @@ public class GameManager : MonoBehaviour
         //re-instantiate RoomController to generate new map
         if (rebuild)
         {
+            Destroy(GameObject.Find("poralMessageExit(Clone)"));
             resetEnemies = GameObject.FindGameObjectsWithTag("enemy");
             resetObstacles = GameObject.FindGameObjectsWithTag("obstacle");
+            currentHealth_p = initialHealth_p;
+            currentStamina_p = totalStamina_p;
             for (var i = 0; i < resetEnemies.Length; i++)
             {
                 if (resetEnemies[i] != null)
@@ -104,37 +114,36 @@ public class GameManager : MonoBehaviour
             initialHealth_e += 50f;
             expGained_e -= 5;
 
-            initialHealth_b += 50f;
-            expGained_b -= 10;
+            initialHealth_b += 1000f;
+            expGained_b += 300;
 
-            totalStamina_e += 5f;
-            attackDamage_e += 5f;
-            stamina_e += 5f;
-            regenRate_e += 0.01f;
+            totalStamina_e += 10f;
+            attackDamage_e += 10f;
+            stamina_e += 10f;
+            regenRate_e += 15f;
 
 
-            totalStamina_b += 50f;
-            attackDamage_b += 0.01f;
+            totalStamina_b += 500f;
+            attackDamage_b += 40f;
             stamina_b += 50f;
-            regenRate_b += 0.1f;
+            regenRate_b += 20f;
 
-            currency_e += 20;
-            currency_b += 200;
+            currency_e += 60;
+            currency_b += 1000;
 
             currentPotions += 2;
-            regenHealth -= 30;
+            regenHealth += 70;
         }
 
         if (currentExp >= totalExp)
         {
             currentExp -= totalExp;
             totalExp += 50;
-            initialHealth_p += 50f;
-
-            totalStamina_p += 50f;
+            initialHealth_p += 100f;
+            totalStamina_p += 2f;
             attackDamage_p += 20f;
-            stamina_p += 50f;
-            regenRate_p += 10f;           
+            stamina_p += 4f;
+            regenRate_p += 20f;           
         }
 
         // Currency Mechanics showing slow increment of currency in the UI

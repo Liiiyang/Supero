@@ -11,11 +11,15 @@ public class PortalController : MonoBehaviour
     public Collider2D col_up;
     public Collider2D col_right;
     public bool spawnBoss;
+    public GameObject portalMessage, portalMessageExit;
 
     private GameObject bossRoom;
     private string action_button;
     private bool nextLevel;
     private bool pressed = false;
+    private GameObject InstantiatedportalMessage, InstantiatedportalMessageExit;
+    public bool spawnPortalMessageOnce;
+
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +37,8 @@ public class PortalController : MonoBehaviour
         action_button = "Action";
 
         spawnBoss = false;
+
+        spawnPortalMessageOnce = false;
 
     }
 
@@ -59,7 +65,22 @@ public class PortalController : MonoBehaviour
     void OnCollisionStay2D(Collision2D other)
     {
         Debug.Log("Collided: " + other.gameObject.name);
-        if (Input.GetButtonDown(action_button) && other.gameObject.name == "portal")
+        if (other.gameObject.name == "portal" && !spawnPortalMessageOnce)
+        {
+            if (!nextLevel)
+            {
+                InstantiatedportalMessage = Instantiate(portalMessage, transform.position, Quaternion.identity) as GameObject;
+                spawnPortalMessageOnce = true;
+            }
+            else
+            {
+
+                InstantiatedportalMessageExit = Instantiate(portalMessageExit, transform.position, Quaternion.identity) as GameObject;
+                spawnPortalMessageOnce = true;
+            }
+            
+        }
+        if (other.gameObject.name == "portal" && Input.GetButtonDown(action_button))
         {
             //Spawns the Boss the first time it is pressed, and all doors will be closed
             if (!pressed)
@@ -84,6 +105,25 @@ public class PortalController : MonoBehaviour
                 gameManager.GetComponent<GameManager>().rebuild = true;
 
 
+            }
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.name == "portal")
+        {
+            if (!nextLevel)
+            {
+                Destroy(InstantiatedportalMessage);
+                var player = GameObject.Find("Player").GetComponent<PortalController>();
+                player.spawnPortalMessageOnce = false;
+            }
+            else
+            {
+                Destroy(InstantiatedportalMessageExit);
+                var player = GameObject.Find("Player").GetComponent<PortalController>();
+                player.spawnPortalMessageOnce = false;
             }
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
+using UnityEngine.UI;
 
 
 public class PlayerController : MonoBehaviour
@@ -9,6 +10,12 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public bool activateChest;
     public GameObject chest;
+    public Color fullHealthColor = Color.red;
+    public Color zeroHealthColor = Color.gray;
+    public Slider slider;
+    public Image FillImage;
+    public GameObject chestMessage, currencyMessage, hiddenMessage, shopMessage;
+
     private Rigidbody2D rb2d;
     private Vector2 moveVelocity;
     private string attack_button, action_button, heal_button;
@@ -18,14 +25,14 @@ public class PlayerController : MonoBehaviour
     private GameManager gm;
     private HealthController hc;
     private bool facingRight;
+    private GameObject InstantiatedchestMessage, InstantiatedcurrencyMessage, InstantiatedhiddenMessage, InstantiatedshopMessage;
+    private bool spawnChestMessageOnce, spawnCurrencyMessageOnce, spawnhiddenMessageOnce, spawnshopMessageOnce;
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         gameManager = GameObject.Find("GameManager");
         gm = gameManager.GetComponent<GameManager>();
-        player = GameObject.Find("Player");
-        hc = player.GetComponent<HealthController>();
         attack_button = "Attack";
         action_button = "Action";
         heal_button = "Heal";
@@ -65,20 +72,27 @@ public class PlayerController : MonoBehaviour
             if (gm.currentPotions != 0)
             {
                 gm.currentPotions -= 1;
-                if ((gm.initialHealth_p - gm.currentHealth) > gm.regenHealth)
+                if ((gm.initialHealth_p - gm.currentHealth_p) > gm.regenHealth)
                 {
-                    gm.currentHealth += gm.regenHealth;
-                    hc.SetHealthUI();
+                    gm.currentHealth_p += gm.regenHealth;
+                    SetHealthUI();
                 }
                 else
                 {
-                    gm.currentHealth = gm.initialHealth_p;
-                    hc.SetHealthUI();
+                    gm.currentHealth_p = gm.initialHealth_p;
+                    SetHealthUI();
                 }
 
             }
             
         }
+    }
+
+    private void SetHealthUI()
+    {
+        // Adjust the value and colour of the slider.
+        slider.value = gm.currentHealth_p;
+        FillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, gm.currentHealth_p / gm.initialHealth_p);
     }
 
     IEnumerator FindCorrectRoom()
@@ -129,6 +143,19 @@ public class PlayerController : MonoBehaviour
     void OnCollisionStay2D(Collision2D other)
     {
         Debug.Log("Collided: " + other.gameObject.name);
+        //Show Hidden Wall Prompt Message
+        if ((other.gameObject.name == "rightDoorh" || other.gameObject.name == "topDoorh"
+            || other.gameObject.name == "leftDoorh" || other.gameObject.name == "bottomDoorh") && !spawnhiddenMessageOnce)
+        {
+            InstantiatedhiddenMessage = Instantiate(hiddenMessage, transform.position, Quaternion.identity) as GameObject;
+            spawnhiddenMessageOnce = true;
+        }
+
+        if (other.gameObject.name == "shopkeeper" && !spawnshopMessageOnce)
+        {
+            InstantiatedshopMessage = Instantiate(shopMessage, transform.position, Quaternion.identity) as GameObject;
+            spawnshopMessageOnce = true;
+        }
         //Activate Hidden Room and set wall to inactive to reveal door, set trigger to false
         if (Input.GetButtonDown(attack_button) && other.gameObject.name == "rightDoorh")
         {
@@ -162,11 +189,17 @@ public class PlayerController : MonoBehaviour
             bottomDoor.SetActive(false);
         }
 
-        if (Input.GetButtonDown(action_button) && other.gameObject.name == "ghost(Clone)")
+        if (other.gameObject.name == "ghost(Clone)" && !spawnCurrencyMessageOnce)
         {
-            Destroy(other.gameObject);
-            gameObject.GetComponent<HealthController>().oddDeaths = false;
-            gm.currency_p += gm.saved_currency;
+            InstantiatedcurrencyMessage = Instantiate(currencyMessage, transform.position, Quaternion.identity) as GameObject;
+            spawnCurrencyMessageOnce = true;
+            if (Input.GetButtonDown(action_button))
+            {
+                Destroy(other.gameObject);
+                gameObject.GetComponent<HealthController>().oddDeaths = false;
+                gm.currency_p += gm.saved_currency;
+            }
+            
         }
 
         if (Input.GetButtonDown(action_button) && other.gameObject.name == "shopkeeper")
@@ -174,5 +207,38 @@ public class PlayerController : MonoBehaviour
             //Activate Shop Menu
             Debug.Log("Shop Activated");
         }
-    }    
+
+        if (other.gameObject.name == "chest(Clone)" && !spawnChestMessageOnce)
+        {
+            InstantiatedchestMessage = Instantiate(chestMessage, transform.position, Quaternion.identity) as GameObject;
+            spawnChestMessageOnce = true;
+
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.name == "chest(Clone)")
+        {
+            Destroy(InstantiatedchestMessage);
+            spawnChestMessageOnce = false;
+        }
+
+        if (other.gameObject.name == "ghost(Clone)")
+        {
+            Destroy(InstantiatedcurrencyMessage);
+            spawnCurrencyMessageOnce = false;
+        }
+        if (other.gameObject.name == "rightDoorh" || other.gameObject.name == "topDoorh"
+            || other.gameObject.name == "leftDoorh" || other.gameObject.name == "bottomDoorh")
+        {
+            Destroy(InstantiatedhiddenMessage);
+            spawnhiddenMessageOnce = false;
+        }
+        if (other.gameObject.name == "shopkeeper" )
+        {
+            Destroy(InstantiatedshopMessage);
+            spawnshopMessageOnce = false;
+        }
+    }
 }

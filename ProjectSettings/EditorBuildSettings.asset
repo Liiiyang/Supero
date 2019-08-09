@@ -6,21 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Rooms/Main.unity
+    path: Assets/Scripts/Dungeon/Rooms/Main.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Rooms/RoomStart.unity
+    path: Assets/Scripts/Dungeon/Rooms/RoomStart.unity
     guid: d26d19d9c0a08c047a65e24973c646b6
   - enabled: 1
-    path: Assets/Scenes/Rooms/RoomNormal.unity
+    path: Assets/Scripts/Dungeon/Rooms/RoomNormal.unity
     guid: f78e2aac9b543ab41aa7df5c2f20f443
   - enabled: 1
-    path: Assets/Scenes/Rooms/RoomBoss.unity
+    path: Assets/Scripts/Dungeon/Rooms/RoomBoss.unity
     guid: ffa6feb1a4b664e4d86d51304eaf201f
   - enabled: 1
-    path: Assets/Scenes/Rooms/RoomShop.unity
+    path: Assets/Scripts/Dungeon/Rooms/RoomShop.unity
     guid: 8a1d151ab29406b4fb0ff62cb89edda3
   - enabled: 1
-    path: Assets/Scenes/Rooms/RoomHidden.unity
+    path: Assets/Scripts/Dungeon/Rooms/RoomHidden.unity
     guid: 095ec901193a39f4da09fd90a41b4bd1
   m_configObjects: {}

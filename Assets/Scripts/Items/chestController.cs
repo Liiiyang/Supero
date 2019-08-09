@@ -22,6 +22,7 @@ public class chestController : MonoBehaviour
     {
         if (Input.GetButtonDown(action_button))
         {
+
             Collider2D[] player = Physics2D.OverlapBoxAll(chest_center.position, chest_size, p);
             for (int i = 0; i < player.Length; i++)
             {

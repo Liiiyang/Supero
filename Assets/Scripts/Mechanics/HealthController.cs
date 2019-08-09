@@ -22,6 +22,7 @@ public class HealthController : MonoBehaviour
     private bool saved = false;
     private GameObject camera,gameManager,deadPoint;
     private GameManager gm;
+    private Transform OldPosition;
     
     
     Vector3 startPos;
@@ -33,18 +34,24 @@ public class HealthController : MonoBehaviour
         if (gameObject.tag == "enemy")
         {
             initialHealth = gm.initialHealth_e;
+            slider.maxValue = initialHealth;
             expGained = gm.expGained_e;
             currency_e = gm.currency_e;
+            currentHealth = gm.currentHealth_e;
         }
         else if (gameObject.tag == "boss")
         {
             initialHealth = gm.initialHealth_b;
+            slider.maxValue = initialHealth;
             expGained = gm.expGained_b;
             currency_b = gm.currency_b;
+            currentHealth = gm.currentHealth_b;
         }
         else if (gameObject.tag == "Player")
         {
             initialHealth = gm.initialHealth_p;
+            slider.maxValue = initialHealth;
+            currentHealth = gm.currentHealth_p;
             totalExp = gm.totalExp;
         }
 
@@ -54,7 +61,6 @@ public class HealthController : MonoBehaviour
     void Start()
     {
         startPos = transform.position;
-        currentHealth = initialHealth;
         oddDeaths = false;
         Debug.Log(gameObject.name + " Starting Health: " + currentHealth.ToString());
         isBossDead = false;
@@ -87,11 +93,11 @@ public class HealthController : MonoBehaviour
         saved = true;
     }
 
-    public void SetHealthUI()
+    private void SetHealthUI()
     {
         // Adjust the value and colour of the slider.
-        slider.value = gm.currentHealth;
-        FillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, gm.currentHealth / initialHealth);
+        slider.value = currentHealth;
+        FillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, currentHealth / initialHealth);
     }
 
     private void OnEnable()
@@ -105,14 +111,17 @@ public class HealthController : MonoBehaviour
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
-        gm.currentHealth = currentHealth;
+        gm.currentHealth_p = currentHealth;
         //Debug.Log(gameObject.name + " current Health: " + currentHealth.ToString());
         SetHealthUI();
         if (currentHealth <= 0f && !isDead)
         {
-            OnDeath();           
+            Invoke("OnDeath", 0.6f);
+                       
         }
     }
+
+    
 
 
     private void OnDeath()
@@ -129,8 +138,12 @@ public class HealthController : MonoBehaviour
                 }               
             }
             currentHealth = initialHealth;
-            gm.currentHealth = currentHealth;
             SetHealthUI();
+
+            camera = GameObject.Find("Main Camera");
+            camera.GetComponent<CameraController>().reset(true);
+            OldPosition = transform;
+            StartCoroutine(waitDeath(transform));
 
             // Leaves behind a ghost sprite when player dies
             if (!oddDeaths)
@@ -139,8 +152,10 @@ public class HealthController : MonoBehaviour
                 {
                     Destroy(deadPoint);
                 }
-                deadPoint = Instantiate(ghost, transform.position, Quaternion.identity) as GameObject;
+                deadPoint = Instantiate(ghost, OldPosition.position, Quaternion.identity) as GameObject;
                 gm.saved_currency = gm.currency_p;
+                gm.currentStamina_p = gm.totalStamina_p;
+                gm.currentHealth_p = gm.initialHealth_p;
                 gm.currency_p = 0;
                 gm.current_currency = 0;
                 oddDeaths = true;
@@ -151,16 +166,16 @@ public class HealthController : MonoBehaviour
                 if (deadPoint != null)
                 {
                     Destroy(deadPoint);
-                    deadPoint = Instantiate(ghost, transform.position, Quaternion.identity) as GameObject;
+                    deadPoint = Instantiate(ghost,OldPosition.position, Quaternion.identity) as GameObject;
                     gm.saved_currency = gm.currency_p;
+                    gm.currentHealth_p = gm.initialHealth_p;
+                    gm.currentStamina_p = gm.totalStamina_p;
                     gm.currency_p = 0;
                     gm.current_currency = 0;
                     oddDeaths = false;
                 }
             }
-            camera = GameObject.Find("Main Camera");
-            camera.GetComponent<CameraController>().reset(true);
-            transform.position = startPos;
+
             for (var i = 0; i < savedGameObjects.Length; i++)
             {
                 if (savedGameObjects[i] != null)
@@ -200,5 +215,12 @@ public class HealthController : MonoBehaviour
             }
         }
         
+    }
+
+    IEnumerator waitDeath(Transform location)
+    {
+        yield return new WaitForSeconds(2f);
+        location.position = startPos;
+        //GameObject cm = GameObject.Find("currencyMessage(Clone)");
     }
 }

@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\Dungeon\Room.cs" />
      <Compile Include="Assets\Scripts\Dungeon\RoomController.cs" />
      <Compile Include="Assets\Scripts\Enemies\AttackBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\BossList.cs" />
      <Compile Include="Assets\Scripts\Enemies\DesertController.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyList.cs" />
      <Compile Include="Assets\Scripts\Enemies\FollowBehaviour.cs" />

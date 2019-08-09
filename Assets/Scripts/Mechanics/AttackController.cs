@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 //Controls the Attack of Player, Enemy and Boss, also accounts for stamina
 public class AttackController : MonoBehaviour
 {
     public Transform attackPos;
+    public TextMeshProUGUI floatingText;
     public float attackRange;
     public LayerMask designatedEnemy;
     public Color fullStaminaColor = Color.green;
@@ -23,37 +25,47 @@ public class AttackController : MonoBehaviour
 
     private GameObject gameManager;
     private GameManager gm;
+    private RectTransform rect;
+
+    private float timebtwAttack;
+    private float startTimebtwAttack = 0.8f;
 
     void Awake()
     {
         gameManager = GameObject.Find("GameManager");
         gm = gameManager.GetComponent<GameManager>();
+        rect = floatingText.GetComponent<RectTransform>();
         if (gameObject.tag == "enemy")
         {
             attackDamage = gm.attackDamage_e;
             stamina = gm.stamina_e;
-            totalStamina = gm.totalStamina_e; 
+            totalStamina = gm.totalStamina_e;
+            slider.maxValue = totalStamina;
             regenRate = gm.regenRate_e;
+            currentStamina = gm.currentStamina_e;
         }
         else if (gameObject.tag == "boss")
         {
             attackDamage = gm.attackDamage_b;
             stamina = gm.stamina_b;
             totalStamina = gm.totalStamina_b;
+            slider.maxValue = totalStamina;
             regenRate = gm.regenRate_b;
+            currentStamina = gm.currentStamina_e;
         }
         else if (gameObject.tag == "Player")
         {
             attackDamage = gm.attackDamage_p;
             stamina = gm.stamina_p;
             totalStamina = gm.totalStamina_p;
+            slider.maxValue = totalStamina;
             regenRate = gm.regenRate_p;
+            currentStamina = gm.currentStamina_p;
         }
     }
     void Start()
     {
         attack_button = "Attack";
-        currentStamina = totalStamina;
     }
     // Update is called once per frame
     void Update()
@@ -63,57 +75,93 @@ public class AttackController : MonoBehaviour
         {
             if (gameObject.tag == "Player")
             {
-                testHealth.TakeDamage(100f);
+                testHealth.TakeDamage(10f);
             }
             
         }
 
-        if (Input.GetButtonDown(attack_button))
+        //Player are free to use their attack and have regen
+        if (gameObject.tag == "Player")
         {
-            currentStamina -= stamina;
-            SetStaminaUI();
-            StaminaRegenTimer = 0.0f;
-        }
-        else
-        {
-            if (StaminaRegenTimer >= StaminaTimeToRegen)
+            if (Input.GetButtonDown(attack_button))
             {
-                currentStamina = Mathf.Clamp(currentStamina + (regenRate * Time.deltaTime), 0.0f, totalStamina);
+                currentStamina -= gm.stamina_p;
+                gm.currentStamina_p = currentStamina;
                 SetStaminaUI();
+                StaminaRegenTimer = 0.0f;
             }
-
             else
             {
-                StaminaRegenTimer += Time.deltaTime;
+                if (StaminaRegenTimer >= StaminaTimeToRegen)
+                {
+                    currentStamina = Mathf.Clamp(currentStamina + (regenRate * Time.deltaTime), 0.0f, totalStamina);
+                    gm.currentStamina_p = currentStamina;
+                    SetStaminaUI();
+                }
+
+                else
+                {
+                    StaminaRegenTimer += Time.deltaTime;
+                }
+            }
+
+            if (gm.currentHealth_p == 0)
+            {
+                currentStamina = gm.totalStamina_p;
             }
         }
 
-        // Can only attack with sufficient stamina else there is a cooldown
-        if (currentStamina != 0)
+        //Player can only attack if he have enough stamina
+        if (gm.currentStamina_p > 0)
         {
+            Debug.Log("Current Stamina: " + gm.currentStamina_p.ToString());
             Collider2D[] attackEnemy = Physics2D.OverlapCircleAll(attackPos.position, attackRange, designatedEnemy);
             for (int i = 0; i < attackEnemy.Length; i++)
             {
                 if (Input.GetButtonDown(attack_button))
                 {
+                    StartCoroutine(showFloatingText(attackEnemy[i], attackDamage));
                     attackEnemy[i].GetComponent<HealthController>().TakeDamage(attackDamage);
                     currentStamina -= stamina;
                     SetStaminaUI();
                 }
-                else if (gameObject.tag == "enemy" || gameObject.tag == "boss")
+            }
+        }
+
+        //Enemy can only attack if they have enough stamina
+        if (gm.currentStamina_e > 0 && timebtwAttack <= 0)
+        {
+            Debug.Log("Current Stamina: " + gm.currentStamina_e.ToString());
+            Collider2D[] attackEnemy = Physics2D.OverlapCircleAll(attackPos.position, attackRange, designatedEnemy);
+            for (int i = 0; i < attackEnemy.Length; i++)
+            {
+                if (gameObject.tag == "enemy")
                 {
-                    attackEnemy[i].GetComponent<HealthController>().TakeDamage(attackDamage);
+                    // Can only attack with sufficient stamina else there is a cooldown
+                    if (gameObject.GetComponent<Animator>().GetBool("isAttacking"))
+                    {
+                        attackEnemy[i].GetComponent<HealthController>().TakeDamage(attackDamage);
+                    }
                     currentStamina -= stamina;
+                    gm.currentStamina_e = currentStamina;
                     SetStaminaUI();
                     StaminaRegenTimer = 0.0f;
                 }
             }
+            timebtwAttack = startTimebtwAttack;
         }
         else
+        {
+            timebtwAttack -= Time.deltaTime;
+        }
+
+        //Stamina Regen for enemy
+        if (gameObject.tag == "enemy")
         {
             if (StaminaRegenTimer >= StaminaTimeToRegen)
             {
                 currentStamina = Mathf.Clamp(currentStamina + (regenRate * Time.deltaTime), 0.0f, totalStamina);
+                gm.currentStamina_e = currentStamina;
                 SetStaminaUI();
             }
 
@@ -121,8 +169,56 @@ public class AttackController : MonoBehaviour
             {
                 StaminaRegenTimer += Time.deltaTime;
             }
+        } 
+
+        // boss can only attack if they have enough stamina
+        if (gm.currentStamina_b > 0)
+        {
+            Debug.Log("Current Stamina: " + gm.currentStamina_e.ToString());
+            Collider2D[] attackEnemy = Physics2D.OverlapCircleAll(attackPos.position, attackRange, designatedEnemy);
+            for (int i = 0; i < attackEnemy.Length; i++)
+            {
+                if (gameObject.tag == "boss")
+                {
+                    // Can only attack with sufficient stamina else there is a cooldown
+                    attackEnemy[i].GetComponent<HealthController>().TakeDamage(attackDamage);
+                    currentStamina -= stamina;
+                    gm.currentStamina_b = currentStamina;
+                    SetStaminaUI();
+                    StaminaRegenTimer = 0.0f;
+                }
+            }
         }
+
+        //Stamina Regen for boss
+        if (gameObject.tag == "boss")
+        {
+            if (StaminaRegenTimer >= StaminaTimeToRegen)
+            {
+                currentStamina = Mathf.Clamp(currentStamina + (regenRate * Time.deltaTime), 0.0f, totalStamina);
+                gm.currentStamina_b = currentStamina;
+                SetStaminaUI();
+            }
+
+            else
+            {
+                StaminaRegenTimer += Time.deltaTime;
+            }
+        } 
+       
+
     }
+
+    //Show damage points when player hits the enemies
+    IEnumerator showFloatingText(Collider2D Enemy, float attackDamage)
+    {
+
+        Enemy.GetComponent<AttackController>().floatingText.GetComponent<Animator>().Play("attackPopup",  0, 0f);
+        Enemy.GetComponent<AttackController>().floatingText.text = Mathf.RoundToInt(attackDamage).ToString();
+        yield return new WaitForSeconds(0.2f);
+
+    }
+
 
     private void SetStaminaUI()
     {
