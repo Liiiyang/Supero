@@ -156,6 +156,11 @@ public class PlayerController : MonoBehaviour
             InstantiatedshopMessage = Instantiate(shopMessage, transform.position, Quaternion.identity) as GameObject;
             spawnshopMessageOnce = true;
         }
+        if(other.gameObject.name =="ghost(Clone)" &&!spawnCurrencyMessageOnce)
+        {
+                        InstantiatedcurrencyMessage = Instantiate(currencyMessage, transform.position, Quaternion.identity) as GameObject;
+            spawnCurrencyMessageOnce = true;
+        }
         //Activate Hidden Room and set wall to inactive to reveal door, set trigger to false
         if (Input.GetButtonDown(attack_button) && other.gameObject.name == "rightDoorh")
         {
@@ -189,16 +194,11 @@ public class PlayerController : MonoBehaviour
             bottomDoor.SetActive(false);
         }
 
-        if (other.gameObject.name == "ghost(Clone)" && !spawnCurrencyMessageOnce)
+        if (Input.GetButtonDown(action_button) && other.gameObject.name == "ghost(Clone)")
         {
-            InstantiatedcurrencyMessage = Instantiate(currencyMessage, transform.position, Quaternion.identity) as GameObject;
-            spawnCurrencyMessageOnce = true;
-            if (Input.GetButtonDown(action_button))
-            {
-                Destroy(other.gameObject);
-                gameObject.GetComponent<HealthController>().oddDeaths = false;
-                gm.currency_p += gm.saved_currency;
-            }
+            Destroy(other.gameObject);
+            gameObject.GetComponent<HealthController>().oddDeaths = false;
+            gm.currency_p += gm.saved_currency;
             
         }
 

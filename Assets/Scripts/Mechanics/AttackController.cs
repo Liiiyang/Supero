@@ -75,7 +75,7 @@ public class AttackController : MonoBehaviour
         {
             if (gameObject.tag == "Player")
             {
-                testHealth.TakeDamage(10f);
+                testHealth.TakeDamage(400f);
             }
             
         }

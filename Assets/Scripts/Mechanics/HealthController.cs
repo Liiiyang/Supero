@@ -23,6 +23,8 @@ public class HealthController : MonoBehaviour
     private GameObject camera,gameManager,deadPoint;
     private GameManager gm;
     private Transform OldPosition;
+    private Rigidbody2D rb2d;
+    public Animator transition;
     
     
     Vector3 startPos;
@@ -60,6 +62,7 @@ public class HealthController : MonoBehaviour
 
     void Start()
     {
+        rb2d = GetComponent<Rigidbody2D>();
         startPos = transform.position;
         oddDeaths = false;
         Debug.Log(gameObject.name + " Starting Health: " + currentHealth.ToString());
@@ -116,6 +119,11 @@ public class HealthController : MonoBehaviour
         SetHealthUI();
         if (currentHealth <= 0f && !isDead)
         {
+
+            if (gameObject.name == "Player")
+            {
+                transition.Play("fadeTransition", 0, 0f);
+            }
             Invoke("OnDeath", 0.6f);
                        
         }
@@ -129,61 +137,64 @@ public class HealthController : MonoBehaviour
         //If its the player, respawn back to start point, else just deactivate it
         if (gameObject.tag == "Player")
         {
-            //Debug.Log("Death Point: X" + transform.position.x.ToString() + " Y: " + transform.position.y.ToString());
-            for (var i = 0; i < oldgameObjects.Length; i++)
+            if (gm.liveCounter > 0)
             {
-                if (savedGameObjects[i] != null)
+                gm.liveCounter -= 1;
+                //Debug.Log("Death Point: X" + transform.position.x.ToString() + " Y: " + transform.position.y.ToString());
+                for (var i = 0; i < oldgameObjects.Length; i++)
                 {
-                    savedGameObjects[i].SetActive(false);
-                }               
-            }
-            currentHealth = initialHealth;
-            SetHealthUI();
-
-            camera = GameObject.Find("Main Camera");
-            camera.GetComponent<CameraController>().reset(true);
-            OldPosition = transform;
-            StartCoroutine(waitDeath(transform));
-
-            // Leaves behind a ghost sprite when player dies
-            if (!oddDeaths)
-            {
-                if (deadPoint != null)
-                {
-                    Destroy(deadPoint);
+                    if (savedGameObjects[i] != null)
+                    {
+                        savedGameObjects[i].SetActive(false);
+                    }
                 }
-                deadPoint = Instantiate(ghost, OldPosition.position, Quaternion.identity) as GameObject;
-                gm.saved_currency = gm.currency_p;
-                gm.currentStamina_p = gm.totalStamina_p;
-                gm.currentHealth_p = gm.initialHealth_p;
-                gm.currency_p = 0;
-                gm.current_currency = 0;
-                oddDeaths = true;
+                currentHealth = initialHealth;
+                SetHealthUI();
 
-            }
-            else
-            {
-                if (deadPoint != null)
+                camera = GameObject.Find("Main Camera");
+                camera.GetComponent<CameraController>().reset(true);
+                OldPosition = transform;
+                StartCoroutine(waitDeath(transform));
+                // Leaves behind a ghost sprite when player dies
+                if (!oddDeaths)
                 {
-                    Destroy(deadPoint);
-                    deadPoint = Instantiate(ghost,OldPosition.position, Quaternion.identity) as GameObject;
+                    if (deadPoint != null)
+                    {
+                        Destroy(deadPoint);
+                    }
+                    deadPoint = Instantiate(ghost, OldPosition.position, Quaternion.identity) as GameObject;
                     gm.saved_currency = gm.currency_p;
-                    gm.currentHealth_p = gm.initialHealth_p;
                     gm.currentStamina_p = gm.totalStamina_p;
+                    gm.currentHealth_p = gm.initialHealth_p;
                     gm.currency_p = 0;
                     gm.current_currency = 0;
-                    oddDeaths = false;
+                    oddDeaths = true;
+
                 }
-            }
-
-            for (var i = 0; i < savedGameObjects.Length; i++)
-            {
-                if (savedGameObjects[i] != null)
+                else
                 {
-                    savedGameObjects[i].SetActive(true);
-                }               
-            } 
+                    if (deadPoint != null)
+                    {
+                        Destroy(deadPoint);
+                        deadPoint = Instantiate(ghost, OldPosition.position, Quaternion.identity) as GameObject;
+                        gm.saved_currency = gm.currency_p;
+                        gm.currentHealth_p = gm.initialHealth_p;
+                        gm.currentStamina_p = gm.totalStamina_p;
+                        gm.currency_p = 0;
+                        gm.current_currency = 0;
+                        oddDeaths = false;
+                    }
+                }
 
+                for (var i = 0; i < savedGameObjects.Length; i++)
+                {
+                    if (savedGameObjects[i] != null)
+                    {
+                        savedGameObjects[i].SetActive(true);
+                    }
+                }
+                
+            }
         }
         else if (gameObject.tag == "boss")
         {
@@ -213,14 +224,12 @@ public class HealthController : MonoBehaviour
                 gm.currentExp += expGained;
                 gm.currency_p += currency_e;
             }
-        }
-        
+        }  
     }
 
     IEnumerator waitDeath(Transform location)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         location.position = startPos;
-        //GameObject cm = GameObject.Find("currencyMessage(Clone)");
     }
 }

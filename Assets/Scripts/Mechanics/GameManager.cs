@@ -7,7 +7,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public GameObject roomController;
-    public TextMeshProUGUI currencyText, potionText;
+    public TextMeshProUGUI currencyText, potionText, liveCounterText;
     public int stage;
     public float initialHealth_p, initialHealth_e, initialHealth_b, regenHealth, currentHealth_p, currentHealth_e, currentHealth_b;
     public int currentExp, totalExp, expGained_e, expGained_b, expGained_p;
@@ -18,14 +18,14 @@ public class GameManager : MonoBehaviour
     public float attackDamage_p, attackDamage_e,attackDamage_b;
     public int currency_p, currency_e, currency_b, saved_currency, current_currency;
     public bool rebuild = false;
-    public int currentPotions;
+    public int liveCounter,currentPotions;
 
     private GameObject[] resetEnemies, resetObstacles;
     private GameObject player;
 
     void Awake()
     {
-        initialHealth_p = 1000f;
+        initialHealth_p = 400f;
         totalExp = 500;
         currentExp = 0;
 
@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
         currentStamina_p = totalStamina_p;
         currentStamina_e = totalStamina_e;
         currentStamina_b = totalStamina_b;
+        liveCounter = 3;
 
     }
     // Start is called before the first frame update
@@ -72,6 +73,7 @@ public class GameManager : MonoBehaviour
     {
         stage = 1;
         player = GameObject.Find("Player");
+        liveCounterText.text = "0" + liveCounter.ToString();
     }
 
     // Update is called once per frame
@@ -82,6 +84,7 @@ public class GameManager : MonoBehaviour
         if (rebuild)
         {
             Destroy(GameObject.Find("poralMessageExit(Clone)"));
+            liveCounter = 3;
             resetEnemies = GameObject.FindGameObjectsWithTag("enemy");
             resetObstacles = GameObject.FindGameObjectsWithTag("obstacle");
             currentHealth_p = initialHealth_p;
@@ -165,6 +168,8 @@ public class GameManager : MonoBehaviour
         }
 
         potionText.text = currentPotions.ToString();
+
+        liveCounterText.text = "0" + liveCounter.ToString();
         
     }
 
