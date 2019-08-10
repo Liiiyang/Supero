@@ -8,38 +8,25 @@ public class CameraController : MonoBehaviour
 
     public Room currentRoom;
 
-    public Room startRoom;
-
     public float moveSpeedWhenRoomChange;
 
-    Vector3 targetPos;
-
-    private bool initialize = false;
-
-    private bool isDead = false;
 
     void Awake()
     {
         instance = this;
-       
     }
 
     void Update()
     {
         UpdatePosition();
-        
-
     }
 
     void UpdatePosition()
     {
-
-
         if (currentRoom == null)
         {
             return;
         }
-
 
         Vector3 targetPosition = GetCameraTargetPosition();
 
@@ -48,30 +35,15 @@ public class CameraController : MonoBehaviour
 
     Vector3 GetCameraTargetPosition()
     {
-        if (initialize == false)
-        {
-            startRoom = currentRoom;
-            initialize = true;
-        }
-
         if (currentRoom == null)
         {
             return Vector3.zero;
         }
 
-        reset(isDead);
-        targetPos = currentRoom.GetRoomCentre();
-        targetPos.z = transform.position.z;
-        return targetPos;
-    }
+        Vector3 targetPosition = currentRoom.GetRoomCentre();
+        targetPosition.z = transform.position.z;
 
-    public void reset(bool isDead)
-    {
-        if (isDead == true)
-        {
-            currentRoom = startRoom;
-        }
-        
+        return targetPosition;
     }
 
     public bool isSwtichScene()
