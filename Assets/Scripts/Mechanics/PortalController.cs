@@ -12,13 +12,18 @@ public class PortalController : MonoBehaviour
     public Collider2D col_right;
     public bool spawnBoss;
     public GameObject portalMessage, portalMessageExit;
+    public bool spawnPortalMessageOnce;
+    public GameObject slider, slidertwo;
 
     private GameObject bossRoom;
     private string action_button;
     private bool nextLevel;
     private bool pressed = false;
     private GameObject InstantiatedportalMessage, InstantiatedportalMessageExit;
-    public bool spawnPortalMessageOnce;
+    private Transform portalPosition;
+    private GameObject player;
+    private HealthController hc;
+    
 
 
     // Start is called before the first frame update
@@ -45,21 +50,20 @@ public class PortalController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         if (gameObject.tag == "Player")
         {
             nextLevel = GetComponent<HealthController>().isBossDead;
             if (GetComponent<HealthController>().isBossDead)
             {
                 Debug.Log("Boss is dead");
-            }
-            
+            } 
         }
        
         if (pressed)
         {
             Debug.Log("pressed Once");
         }
-
     }
 
     void OnCollisionStay2D(Collision2D other)
@@ -88,6 +92,7 @@ public class PortalController : MonoBehaviour
                 spawnBoss = true;
                 pressed = true;
 
+                portalPosition = gameObject.transform;
                 var bossRoom = GameObject.FindWithTag("bossRoom").GetComponent<PortalController>();
 
                 bossRoom.spawnBoss = true;

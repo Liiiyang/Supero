@@ -42,7 +42,6 @@ public class Room : MonoBehaviour
     {
         if (RoomController.instance == null)
         {
-            Debug.Log("Please Play Main Scene!");
             return;
         }
 

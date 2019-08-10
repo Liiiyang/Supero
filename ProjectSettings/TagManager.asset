@@ -19,6 +19,7 @@ TagManager:
   - topDoorh
   - bottomDoorh
   - ghost
+  - bossSlider
   layers:
   - Default
   - TransparentFX
@@ -65,6 +66,9 @@ TagManager:
   - name: Player
     uniqueID: 1095784321
     locked: 0
+  - name: portal
+    uniqueID: 3871369321
+    locked: 0
   - name: Enemies
     uniqueID: 589903813
     locked: 0
@@ -73,9 +77,6 @@ TagManager:
     locked: 0
   - name: boss_props
     uniqueID: 2100732513
-    locked: 0
-  - name: portal
-    uniqueID: 3871369321
     locked: 0
   - name: hDoor
     uniqueID: 802424613

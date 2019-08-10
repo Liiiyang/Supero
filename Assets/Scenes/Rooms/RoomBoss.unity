@@ -2034,10 +2034,10 @@ MonoBehaviour:
   col_left: {fileID: 604153009}
   col_up: {fileID: 604153011}
   col_right: {fileID: 604153010}
-  leftwall: {fileID: 0}
-  rightwall: {fileID: 0}
-  topwall: {fileID: 0}
-  bottomwall: {fileID: 0}
+  leftwall: {fileID: 1376901216}
+  rightwall: {fileID: 797631972}
+  topwall: {fileID: 355597866}
+  bottomwall: {fileID: 1218006207}
   leftDoorh: {fileID: 332761532}
   rightDoorh: {fileID: 82979417}
   topDoorh: {fileID: 477091968}
@@ -2398,6 +2398,8 @@ MonoBehaviour:
   portalMessageExit: {fileID: 7040679772566717749, guid: 16a18ae90ac11414886ad99ed4c98a49,
     type: 3}
   spawnPortalMessageOnce: 0
+  slider: {fileID: 0}
+  slidertwo: {fileID: 0}
 --- !u!1 &609883186
 GameObject:
   m_ObjectHideFlags: 0
@@ -4167,7 +4169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404567382}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.5, y: 2.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 604153008}
@@ -4229,7 +4231,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -423597975
-  m_SortingLayer: 7
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ee513d84a2ae8994c81fc6aa3ae8e495, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

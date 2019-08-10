@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
         initialHealth_e = 73f;
         expGained_e = 10;
 
-        initialHealth_b = 50f;
+        initialHealth_b = 100f;
         expGained_b = 550;
 
         totalStamina_p = 93f;
@@ -83,6 +84,10 @@ public class GameManager : MonoBehaviour
         //re-instantiate RoomController to generate new map
         if (rebuild)
         {
+            if (SceneManager.GetActiveScene().name == "Tutorial")
+            {
+                SceneManager.LoadScene("NewGame");
+            }
             Destroy(GameObject.Find("poralMessageExit(Clone)"));
             liveCounter = 3;
             resetEnemies = GameObject.FindGameObjectsWithTag("enemy");

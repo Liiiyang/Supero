@@ -44,5 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossList:
-  - boss: {fileID: 5694727574382115023, guid: 55894c505b213b14194c0c95d866a4e6, type: 3}
+  - boss: {fileID: 6481532127471399123, guid: dd380c83ddc04bc4e867500854e14055, type: 3}
+    weight: 0.5
+  - boss: {fileID: 5766997255925167129, guid: dfe161752e2d3ae4db60cea89dfed61a, type: 3}
+    weight: 0.5
+  - boss: {fileID: 1285135223057772242, guid: 6aef9e46842f00645b906e2d1dd2d6cd, type: 3}
     weight: 0.5

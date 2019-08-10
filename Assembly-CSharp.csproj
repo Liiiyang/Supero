@@ -68,8 +68,13 @@
      <Compile Include="Assets\Scripts\Enemies\DesertController.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyList.cs" />
      <Compile Include="Assets\Scripts\Enemies\FollowBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Forest_01_Projectile.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Forest_05_Projectile.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Forest_08_Projectile.cs" />
      <Compile Include="Assets\Scripts\Enemies\IdleBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\resetPosition.cs" />
      <Compile Include="Assets\Scripts\Enemies\WalkBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\WalkBehaviourBoss.cs" />
      <Compile Include="Assets\Scripts\Items\chestController.cs" />
      <Compile Include="Assets\Scripts\Items\obstaclesList.cs" />
      <Compile Include="Assets\Scripts\Mechanics\AttackController.cs" />
@@ -79,6 +84,9 @@
      <Compile Include="Assets\Scripts\Mechanics\ObjectGenerator.cs" />
      <Compile Include="Assets\Scripts\Mechanics\PortalController.cs" />
      <Compile Include="Assets\Scripts\Mechanics\RandomSpawnTest.cs" />
+     <Compile Include="Assets\Scripts\Menu\AnimatorFunctions.cs" />
+     <Compile Include="Assets\Scripts\Menu\MenuButton.cs" />
+     <Compile Include="Assets\Scripts\Menu\MenuButtonController.cs" />
      <Compile Include="Assets\Scripts\Player\CameraController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\TooCubeForest\demoScenes\Movement.cs" />

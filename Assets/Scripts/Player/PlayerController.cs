@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
         moveVelocity = movement.normalized * speed;
 
-        //Debug.Log("Player current x: " + gameObject.transform.position.x.ToString() + " Player current y: " + gameObject.transform.position.y.ToString());
+        Debug.Log("Player current x: " + gameObject.transform.position.x.ToString() + " Player current y: " + gameObject.transform.position.y.ToString());
 
         hiddenRoom = GameObject.FindWithTag("hiddenRoom");
 

@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //Controls the Health of Player, Enemy and Boss
 public class HealthController : MonoBehaviour
 {
     public GameObject[] oldgameObjects;
     public GameObject[] savedGameObjects;
+    public GameObject boss, instance;
     public bool isBossDead;
     public Color fullHealthColor = Color.red;
     public Color zeroHealthColor = Color.gray;  
@@ -15,6 +17,8 @@ public class HealthController : MonoBehaviour
     public Image FillImage;
     public GameObject ghost;
     public bool oddDeaths;
+    public Animator transition;
+    public bool playerisDead = false;
 
     private int totalExp,expGained, currency_e, currency_b;
     private float currentHealth,initialHealth;
@@ -24,7 +28,10 @@ public class HealthController : MonoBehaviour
     private GameManager gm;
     private Transform OldPosition;
     private Rigidbody2D rb2d;
-    public Animator transition;
+    private bool savedBoss = false;
+    
+
+    
     
     
     Vector3 startPos;
@@ -88,6 +95,14 @@ public class HealthController : MonoBehaviour
             }
 
         }
+
+        if (gameObject.tag == "Player")
+        {
+            if (gameObject.transform.position == startPos)
+            {
+                playerisDead = false;
+            }
+        }
     }
 
     IEnumerator stopSaving()
@@ -124,7 +139,7 @@ public class HealthController : MonoBehaviour
             {
                 transition.Play("fadeTransition", 0, 0f);
             }
-            Invoke("OnDeath", 0.6f);
+            Invoke("OnDeath", 0.5f);
                        
         }
     }
@@ -139,6 +154,7 @@ public class HealthController : MonoBehaviour
         {
             if (gm.liveCounter > 0)
             {
+                playerisDead = true;
                 gm.liveCounter -= 1;
                 //Debug.Log("Death Point: X" + transform.position.x.ToString() + " Y: " + transform.position.y.ToString());
                 for (var i = 0; i < oldgameObjects.Length; i++)
@@ -191,9 +207,15 @@ public class HealthController : MonoBehaviour
                     if (savedGameObjects[i] != null)
                     {
                         savedGameObjects[i].SetActive(true);
+
+
                     }
                 }
-                
+              
+            }
+            else
+            {
+                SceneManager.LoadScene("MainMenu");
             }
         }
         else if (gameObject.tag == "boss")
@@ -220,6 +242,7 @@ public class HealthController : MonoBehaviour
         {
             if (gameObject != null)
             {
+                gameObject.GetComponent<Animator>().enabled = false; ;
                 gameObject.SetActive(false);
                 gm.currentExp += expGained;
                 gm.currency_p += currency_e;

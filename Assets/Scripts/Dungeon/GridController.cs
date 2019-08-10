@@ -33,10 +33,11 @@ public class GridController : MonoBehaviour
 
     void Update()
     {
+        GameObject rc = GameObject.Find("RoomController");
         if (GetComponentInParent<ObjectGenerator>().spawning && !StopSpawning)
         {
             Debug.Log("Spawn Boss");
-            if (gameObject.tag == "bossRoom")
+            if (gameObject.tag == "bossRoom" && rc.GetComponent<RoomController>().isBossRoomCreated)
             {
                 GeneratedGrid();
                 StopSpawning = true;
@@ -47,7 +48,7 @@ public class GridController : MonoBehaviour
 
     IEnumerator DelaySpawns()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2f);
         if (gameObject.tag != "bossRoom")
         {
             GeneratedGrid();

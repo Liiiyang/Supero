@@ -17,6 +17,7 @@ public class RoomController : MonoBehaviour
     public List<Room> roomList = new List<Room>();
     public bool clearList = false;
     public bool spawnBossHiddenRoom = false;
+    public bool isBossRoomCreated = false;
 
     private string currentRoomName = "Room";
 
@@ -37,6 +38,8 @@ public class RoomController : MonoBehaviour
     bool createHiddenRoom = false;
 
     bool updatedRoom = false;
+
+    bool finishedQueueing = false;
 
     void Awake()
     {
@@ -71,7 +74,6 @@ public class RoomController : MonoBehaviour
             if (!createBossRoom)
             {
                 StartCoroutine(CreateBossRoom());
-                //StartCoroutine(CreateShopRoom());
                 StartCoroutine(CreateHiddenRoom());
             }
             else if (createBossRoom && createHiddenRoom && !updatedRoom)
@@ -93,42 +95,27 @@ public class RoomController : MonoBehaviour
     IEnumerator CreateBossRoom()
     {
         createBossRoom = true;
-        yield return new WaitForSeconds(1f);
-        if(roomQueue.Count == 0)
+        yield return new WaitForSeconds(0.5f);
+        if(roomQueue.Count == 0 || finishedQueueing)
         {
             Room bossRoom = roomList[roomList.Count - 1];
             if((bossRoom.x>2 ||bossRoom.x<-2) || (bossRoom.y>2 || bossRoom.y<-2))
             {
+                Debug.Log("Boss Room");
                 Room tempRoom = new Room(bossRoom.x, bossRoom.y);
                 Destroy(bossRoom.gameObject);
                 var roomToRemove = roomList.Single( r => r.x  == tempRoom.x && r.y == tempRoom.y);
                 roomList.Remove(roomToRemove);
                 LoadRoom("Boss", tempRoom.x, tempRoom.y);
+                isBossRoomCreated = true;
             }
         }
     }
-
-    IEnumerator CreateShopRoom()
-    {
-        createShopRoom = true;
-        yield return new WaitForSeconds(1f);
-        if(roomQueue.Count == 1)
-        {
-                Room shopRoom = roomList[roomList.Count - 2];
-                Room tempRoom = new Room(shopRoom.x, shopRoom.y);
-                Destroy(shopRoom.gameObject);
-                var roomToRemove = roomList.Single( r => r.x  == tempRoom.x && r.y == tempRoom.y);
-                roomList.Remove(roomToRemove);
-                LoadRoom("Shop", tempRoom.x, tempRoom.y);
-        }
-
-    }
-
     IEnumerator CreateHiddenRoom()
     {
         createHiddenRoom = true;
-        yield return new WaitForSeconds(1f);
-        if(roomQueue.Count == 1)
+        yield return new WaitForSeconds(2f);
+        if(roomQueue.Count == 0 && isBossRoomCreated)
         {
             Room hiddenRoom = roomList[roomList.Count - 2];
             if((hiddenRoom.x<2 ||hiddenRoom.x>-2) && (hiddenRoom.y<2 || hiddenRoom.y>-2))
@@ -154,6 +141,10 @@ public class RoomController : MonoBehaviour
         newRoom.y = y;
 
         roomQueue.Enqueue(newRoom);
+
+        finishedQueueing = true;
+
+
     }
 
     IEnumerator LoadRoomRoutine(RoomInformation info)

@@ -24,6 +24,7 @@ public class ObjectGenerator : MonoBehaviour
     void Awake()
     {
         pc = GetComponent<PortalController>();
+        
     }
     void Start()
     {
@@ -38,6 +39,7 @@ public class ObjectGenerator : MonoBehaviour
         {
             Debug.Log("True");
         }
+        
     }
     public void IntializeSpawning()
     {

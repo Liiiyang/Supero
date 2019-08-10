@@ -1901,7 +1901,7 @@ MonoBehaviour:
     objectData: {fileID: 11400000, guid: 9c2f39c4d3ee62f4f8ab18a9cfdf24a3, type: 2}
     spawn: 1
   spawning: 0
-  sc: {fileID: 604153021}
+  pc: {fileID: 0}
 --- !u!114 &604153021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1914,13 +1914,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48ea40ee499f464fa55040d5d1714cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  col_bottom: {fileID: 604153019}
+  col_left: {fileID: 604153019}
+  col_up: {fileID: 604153019}
+  col_right: {fileID: 604153019}
   spawnBoss: 0
-  col_bottom: {fileID: 604153006}
-  col_left: {fileID: 604153009}
-  col_up: {fileID: 604153011}
-  col_right: {fileID: 604153010}
-  rr: 
-  lr: 
+  portalMessage: {fileID: 0}
+  portalMessageExit: {fileID: 0}
+  spawnPortalMessageOnce: 0
 --- !u!1 &609883186
 GameObject:
   m_ObjectHideFlags: 0
