@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        initialHealth_p = 400f;
+        initialHealth_p = 1000f;
         totalExp = 500;
         currentExp = 0;
 

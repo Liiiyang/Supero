@@ -19,9 +19,10 @@ public class HealthController : MonoBehaviour
     public bool oddDeaths;
     public Animator transition;
     public bool playerisDead = false;
+    public float currentHealth;
 
     private int totalExp,expGained, currency_e, currency_b;
-    private float currentHealth,initialHealth;
+    private float initialHealth;
     private bool isDead;
     private bool saved = false;
     private GameObject camera,gameManager,deadPoint;
@@ -102,7 +103,9 @@ public class HealthController : MonoBehaviour
             {
                 playerisDead = false;
             }
+            
         }
+
     }
 
     IEnumerator stopSaving()
@@ -156,6 +159,14 @@ public class HealthController : MonoBehaviour
             {
                 playerisDead = true;
                 gm.liveCounter -= 1;
+                var bossRoom = GameObject.FindWithTag("bossRoom").GetComponent<PortalController>();
+
+                bossRoom.spawnBoss = true;
+
+                bossRoom.col_bottom.isTrigger = true;
+                bossRoom.col_up.isTrigger = true;
+                bossRoom.col_left.isTrigger = true;
+                bossRoom.col_right.isTrigger = true;
                 //Debug.Log("Death Point: X" + transform.position.x.ToString() + " Y: " + transform.position.y.ToString());
                 for (var i = 0; i < oldgameObjects.Length; i++)
                 {

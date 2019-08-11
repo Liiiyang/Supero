@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public Slider slider;
     public Image FillImage;
     public GameObject chestMessage, currencyMessage, hiddenMessage, shopMessage;
+    public AudioSource heal_Sound, portal_Sound;
+    public Animator starting;
 
     private Rigidbody2D rb2d;
     private Vector2 moveVelocity;
@@ -27,9 +29,12 @@ public class PlayerController : MonoBehaviour
     private bool facingRight;
     private GameObject InstantiatedchestMessage, InstantiatedcurrencyMessage, InstantiatedhiddenMessage, InstantiatedshopMessage;
     private bool spawnChestMessageOnce, spawnCurrencyMessageOnce, spawnhiddenMessageOnce, spawnshopMessageOnce;
+    private Material rightSide;
 
     void Start()
     {
+
+        starting.SetBool("exit",true);
         rb2d = GetComponent<Rigidbody2D>();
         gameManager = GameObject.Find("GameManager");
         gm = gameManager.GetComponent<GameManager>();
@@ -37,10 +42,12 @@ public class PlayerController : MonoBehaviour
         action_button = "Action";
         heal_button = "Heal";
         facingRight = true;
+        //rightSide = this.GetComponent<SpriteRenderer>().material;
     }
 
     void Update()
     {
+        StartCoroutine(destroyAnimation());
         //Store the current horizontal input in the float moveHorizontal.
         float moveHorizontal = Input.GetAxis("Horizontal");
 
@@ -52,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
         moveVelocity = movement.normalized * speed;
 
-        Debug.Log("Player current x: " + gameObject.transform.position.x.ToString() + " Player current y: " + gameObject.transform.position.y.ToString());
+        //Debug.Log("Player current x: " + gameObject.transform.position.x.ToString() + " Player current y: " + gameObject.transform.position.y.ToString());
 
         hiddenRoom = GameObject.FindWithTag("hiddenRoom");
 
@@ -72,20 +79,31 @@ public class PlayerController : MonoBehaviour
             if (gm.currentPotions != 0)
             {
                 gm.currentPotions -= 1;
-                if ((gm.initialHealth_p - gm.currentHealth_p) > gm.regenHealth)
+                if ((gm.currentHealth_p + gm.regenHealth) <=gm.initialHealth_p)
                 {
                     gm.currentHealth_p += gm.regenHealth;
                     SetHealthUI();
+                    heal_Sound.Play();
                 }
                 else
                 {
                     gm.currentHealth_p = gm.initialHealth_p;
                     SetHealthUI();
+                    heal_Sound.Play();
                 }
 
             }
             
         }
+
+        
+    }
+    IEnumerator destroyAnimation()
+    {
+        yield return new WaitForSeconds(1.5f);
+        //Destroy(starting);
+        starting.enabled = false;
+        portal_Sound.Stop();
     }
 
     private void SetHealthUI()
@@ -133,10 +151,12 @@ public class PlayerController : MonoBehaviour
     {
         if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
         {
+            //this.GetComponent<SpriteRenderer>().material = leftSide;
             facingRight = !facingRight;
             Vector3 scale = transform.localScale;
             scale.x *= -1;
             transform.localScale = scale;
+            
         }
     }
 
@@ -158,7 +178,7 @@ public class PlayerController : MonoBehaviour
         }
         if(other.gameObject.name =="ghost(Clone)" &&!spawnCurrencyMessageOnce)
         {
-                        InstantiatedcurrencyMessage = Instantiate(currencyMessage, transform.position, Quaternion.identity) as GameObject;
+            InstantiatedcurrencyMessage = Instantiate(currencyMessage, transform.position, Quaternion.identity) as GameObject;
             spawnCurrencyMessageOnce = true;
         }
         //Activate Hidden Room and set wall to inactive to reveal door, set trigger to false

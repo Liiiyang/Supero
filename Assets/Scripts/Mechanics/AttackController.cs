@@ -14,7 +14,9 @@ public class AttackController : MonoBehaviour
     public Color fullStaminaColor = Color.green;
     public Color zeroStaminaColor = Color.gray;
     public Slider slider;
-    public Image FillImage; 
+    public Image FillImage;
+    public AudioSource attack_Sound;
+   
 
     private float stamina,regenRate;
     private float attackDamage;
@@ -26,7 +28,7 @@ public class AttackController : MonoBehaviour
     private GameObject gameManager;
     private GameManager gm;
     private RectTransform rect;
-
+    
     private float timebtwAttack;
     private float startTimebtwAttack = 0.8f;
 
@@ -66,6 +68,7 @@ public class AttackController : MonoBehaviour
     void Start()
     {
         attack_button = "Attack";
+        
     }
     // Update is called once per frame
     void Update()
@@ -85,10 +88,12 @@ public class AttackController : MonoBehaviour
         {
             if (Input.GetButtonDown(attack_button))
             {
+                attack_Sound.Play();
                 currentStamina -= gm.stamina_p;
                 gm.currentStamina_p = currentStamina;
                 SetStaminaUI();
                 StaminaRegenTimer = 0.0f;
+                
             }
             else
             {
@@ -120,6 +125,7 @@ public class AttackController : MonoBehaviour
             {
                 if (Input.GetButtonDown(attack_button))
                 {
+                    attack_Sound.Play();
                     StartCoroutine(showFloatingText(attackEnemy[i], attackDamage));
                     attackEnemy[i].GetComponent<HealthController>().TakeDamage(attackDamage);
                     currentStamina -= stamina;

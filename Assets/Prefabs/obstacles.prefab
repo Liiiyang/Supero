@@ -47,9 +47,6 @@ MonoBehaviour:
   - obstacle: {fileID: 8605049815043550668, guid: 0265b831052aaf04dbd45dd6b3d23e1f,
       type: 3}
     weight: 0.5
-  - obstacle: {fileID: 901984536763823431, guid: 8bb637a4237603741983b81f4e0790cb,
-      type: 3}
-    weight: 0.5
   - obstacle: {fileID: 8820015092966215424, guid: 565683f737d082d4c896bcf209a9460c,
       type: 3}
-    weight: 1
+    weight: 0.2

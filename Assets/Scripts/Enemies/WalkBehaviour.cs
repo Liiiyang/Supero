@@ -37,6 +37,7 @@ public class WalkBehaviour : StateMachineBehaviour
             {
                 moveSpot.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
             }
+
         }
     }
 

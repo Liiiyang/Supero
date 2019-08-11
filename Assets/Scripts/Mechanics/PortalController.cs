@@ -13,7 +13,6 @@ public class PortalController : MonoBehaviour
     public bool spawnBoss;
     public GameObject portalMessage, portalMessageExit;
     public bool spawnPortalMessageOnce;
-    public GameObject slider, slidertwo;
 
     private GameObject bossRoom;
     private string action_button;
@@ -103,14 +102,20 @@ public class PortalController : MonoBehaviour
                 bossRoom.col_right.isTrigger = false;
 
             }
-            else if (pressed && nextLevel)
+        }
+        if (pressed && nextLevel)
+        {
+            if (other.gameObject.name == "portal" && Input.GetButtonDown(action_button))
             {
                 //Boss is defeated and go to next level
-                var gameManager = GameObject.Find("GameManager");
-                gameManager.GetComponent<GameManager>().rebuild = true;
-
+                this.GetComponent<Animator>().enabled = true;
+                this.GetComponent<Animator>().SetBool("enter", true);
+                Invoke("nextStage", 2f);
+                
 
             }
+            
+
         }
     }
 
@@ -131,5 +136,11 @@ public class PortalController : MonoBehaviour
                 player.spawnPortalMessageOnce = false;
             }
         }
+    }
+
+    private void nextStage()
+    {
+        var gameManager = GameObject.Find("GameManager");
+        gameManager.GetComponent<GameManager>().rebuild = true;
     }
 }

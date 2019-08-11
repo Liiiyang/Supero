@@ -24,21 +24,28 @@ public class WalkBehaviourBoss : StateMachineBehaviour
     {
         bossRoom = GameObject.FindGameObjectWithTag("bossRoom");
         playerPosition = GameObject.FindGameObjectWithTag("Player").transform;
+        Debug.Log("Player is here: " + playerPosition.position.x.ToString());
         Transform animatorPos = animator.transform;
         GameObject moveSpotGO = new GameObject();
         moveSpot = moveSpotGO.transform;
         roomScript = bossRoom.GetComponent<Room>();
-        minX = roomScript.leftwall.transform.position.x + 5;
-        //Debug.Log("Left Boss wall: " + roomScript.leftwall.transform.position.x.ToString());
-        maxX = roomScript.rightwall.transform.position.x - 5;
-        //Debug.Log("Right Boss wall: " + roomScript.rightwall.transform.position.x.ToString());
-        minY = roomScript.bottomwall.transform.position.y + 5;
-        //Debug.Log("Bottom Boss wall: " + roomScript.bottomwall.transform.position.x.ToString());
-        maxY = roomScript.topwall.transform.position.y - 5;
-        //Debug.Log("Top Boss wall: " + roomScript.topwall.transform.position.x.ToString());
+        minX = roomScript.leftwall.transform.position.x + 8;
+        Debug.Log("Left Boss wall: " + roomScript.leftwall.transform.position.x.ToString());
+        maxX = roomScript.rightwall.transform.position.x -8;
+        Debug.Log("Right Boss wall: " + roomScript.rightwall.transform.position.x.ToString());
+        minY = roomScript.bottomwall.transform.position.y + 8;
+        Debug.Log("Bottom Boss wall: " + roomScript.bottomwall.transform.position.y.ToString());
+        maxY = roomScript.topwall.transform.position.y - 8;
+        Debug.Log("Top Boss wall: " + roomScript.topwall.transform.position.y.ToString());
+        Debug.Log("Boss X movement: " + animatorPos.position.x.ToString());
         if (animatorPos.position.x > minX && animatorPos.position.x < maxX && animatorPos.position.y > minY && animatorPos.position.y < maxY)
         {
             moveSpot.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+
+        }
+        else
+        {
+            moveSpot.position = new Vector2(Random.Range(maxX, minX), Random.Range(maxY, minY));
         }
     }
 
