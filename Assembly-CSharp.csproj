@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Dungeon\GridController.cs" />
      <Compile Include="Assets\Scripts\Dungeon\Room.cs" />
      <Compile Include="Assets\Scripts\Dungeon\RoomController.cs" />
+     <Compile Include="Assets\Scripts\Enemies\AlertBehaviour.cs" />
      <Compile Include="Assets\Scripts\Enemies\AttackBehaviour.cs" />
      <Compile Include="Assets\Scripts\Enemies\BossList.cs" />
      <Compile Include="Assets\Scripts\Enemies\DesertController.cs" />

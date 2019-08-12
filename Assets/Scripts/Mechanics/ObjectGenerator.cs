@@ -50,7 +50,7 @@ public class ObjectGenerator : MonoBehaviour
                 SpawnObject(os);
                 spawning = false;
             }
-            else if (os.spawn == true)
+            else if (!spawning && os.spawn == true)
             {
                 SpawnObject(os);
             }

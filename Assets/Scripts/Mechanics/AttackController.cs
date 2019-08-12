@@ -155,6 +155,7 @@ public class AttackController : MonoBehaviour
                     {
                         var player = GameObject.Find("Player");
                         player.GetComponent<Animator>().SetBool("damage", true);
+                        attack_Sound.Play();
                         attackEnemy[i].GetComponent<HealthController>().TakeDamage(attackDamage);
                     }
                     currentStamina -= stamina;

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject roomController,saveProgressText;
+    public GameObject roomController, saveProgressText, levelupText;
     public TextMeshProUGUI currencyText, potionText, liveCounterText;
     public int stage;
     public float initialHealth_p, initialHealth_e, initialHealth_b, regenHealth, currentHealth_p, currentHealth_e, currentHealth_b;
@@ -25,8 +25,9 @@ public class GameManager : MonoBehaviour
     private GameObject[] resetEnemies, resetObstacles;
     private GameObject player;
     private string save_button;
-    private GameObject InstantiatedsaveMessage;
+    private GameObject InstantiatedsaveMessage, InstantiatedLevelupMessage;
     private bool spawnMessageOnce = false;
+    private bool spawnLevelupOnce = false;
 
     void Awake()
     {
@@ -46,10 +47,10 @@ public class GameManager : MonoBehaviour
         currentExp = 0;
 
         initialHealth_e = ((stage - 1) * 50f) + 73f;
-        expGained_e = 10;
+        expGained_e = 550;
 
         initialHealth_b = 100f;
-        expGained_b = 550;
+        expGained_b = 50;
 
         totalStamina_p = ((stage - 1)* 2f)+ 93f;
         attackDamage_p = ((stage - 1)* 20f)+ 73f;
@@ -100,6 +101,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Save"))
         {
+
             if (!spawnMessageOnce)
             {
                 InstantiatedsaveMessage = Instantiate(saveProgressText, transform.position, Quaternion.identity) as GameObject;
@@ -109,13 +111,13 @@ public class GameManager : MonoBehaviour
             }
 
 
-
         }
 
         //if boss have been defeated and the player has interacted with the portal,
         //re-instantiate RoomController to generate new map
         if (rebuild)
         {
+
             
             if (SceneManager.GetActiveScene().name == "Tutorial")
             {
@@ -179,6 +181,11 @@ public class GameManager : MonoBehaviour
 
         if (currentExp >= totalExp)
         {
+            if (!spawnLevelupOnce)
+            {
+                InstantiatedLevelupMessage = Instantiate(levelupText, transform.position, Quaternion.identity) as GameObject;
+                StartCoroutine(destroyMessage());
+            }
             if (stage != 1)
             {
                 currentExp -= totalExp;
@@ -234,5 +241,14 @@ public class GameManager : MonoBehaviour
         Destroy(InstantiatedsaveMessage);
         spawnMessageOnce = false;
     }
+
+        IEnumerator destroyLevelupMessage()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(InstantiatedLevelupMessage);
+        spawnLevelupOnce = false;
+    }
+
+   
 
 }

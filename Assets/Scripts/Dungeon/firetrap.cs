@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class firetrap : MonoBehaviour
 {
+    public AudioSource firetrapSound;
     private Collider2D fireCollision;
     //private AudioSource fireSound;
     private float flameDamage;
@@ -14,6 +15,7 @@ public class firetrap : MonoBehaviour
         fireCollision = this.GetComponent<Collider2D>();
         //fireSound = this.GetComponent<AudioSource>();
         flameDamage = 50f;
+        firetrapSound.Play();
         
     }
 
@@ -23,6 +25,7 @@ public class firetrap : MonoBehaviour
         if (other.gameObject.tag == "enemy")
         {
             other.gameObject.GetComponent<HealthController>().TakeDamage(flameDamage);
+            
         }
        
     }

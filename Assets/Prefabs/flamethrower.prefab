@@ -138,9 +138,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: 6fce705e2b8c1b640859a7577d26ec13, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.002
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -236,3 +236,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcc5fcc2ce64624dafca18bcc5282ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firetrapSound: {fileID: 7429123645121465195}

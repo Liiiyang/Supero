@@ -29,15 +29,14 @@ public class WalkBehaviour : StateMachineBehaviour
         foreach (GameObject room in roomList)
         {
             Room roomScript = room.GetComponent<Room>();
-            minX = roomScript.leftwall.transform.position.x + 5;
-            maxX = roomScript.rightwall.transform.position.x -5;
-            minY = roomScript.bottomwall.transform.position.y + 5;
-            maxY = roomScript.topwall.transform.position.y - 5;
+            minX = roomScript.leftDoor.transform.position.x + 1;
+            maxX = roomScript.rightDoor.transform.position.x -1;
+            minY = roomScript.bottomDoor.transform.position.y + 1;
+            maxY = roomScript.topDoor.transform.position.y - 1;
             if (animatorPos.position.x>minX && animatorPos.position.x<maxX && animatorPos.position.y>minY && animatorPos.position.y < maxY)
             {
                 moveSpot.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
             }
-
         }
     }
 

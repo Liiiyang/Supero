@@ -582,6 +582,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldgameObjects: []
   savedGameObjects: []
+  deadMessage: {fileID: 3364829407278302543, guid: 6a0f32212faaeb44da89ae4df28e5329,
+    type: 3}
   boss: {fileID: 0}
   instance: {fileID: 0}
   isBossDead: 0
@@ -617,6 +619,7 @@ MonoBehaviour:
   slider: {fileID: 2578005915833994073}
   FillImage: {fileID: 4279518110619136869}
   attack_Sound: {fileID: 54141285091255486}
+  player_attack: {fileID: 0}
 --- !u!114 &5458245089326473615
 MonoBehaviour:
   m_ObjectHideFlags: 0

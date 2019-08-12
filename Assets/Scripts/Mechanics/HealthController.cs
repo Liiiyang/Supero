@@ -9,6 +9,7 @@ public class HealthController : MonoBehaviour
 {
     public GameObject[] oldgameObjects;
     public GameObject[] savedGameObjects;
+    public GameObject deadMessage;
     public GameObject boss, instance;
     public bool isBossDead;
     public Color fullHealthColor = Color.red;
@@ -31,6 +32,8 @@ public class HealthController : MonoBehaviour
     private Rigidbody2D rb2d;
     private bool savedBoss = false;
     private AudioSource[] bossMusic;
+    private AudioSource[] enemyDead;
+    private GameObject InstantiatedDeadMessage;
     
 
     
@@ -158,6 +161,8 @@ public class HealthController : MonoBehaviour
         {
             if (gm.liveCounter > 0)
             {
+                InstantiatedDeadMessage = Instantiate(deadMessage, transform.position, Quaternion.identity) as GameObject;
+                StartCoroutine(destroyMessage());
                 bossMusic = gameObject.GetComponents<AudioSource>();
                 bossMusic[3].Pause();
                 gameManager.GetComponent<AudioSource>().Play();
@@ -165,12 +170,15 @@ public class HealthController : MonoBehaviour
             
                 var bossRoom = GameObject.FindWithTag("bossRoom").GetComponent<PortalController>();
 
-                bossRoom.spawnBoss = true;
+                if (bossRoom != null)
+                {
 
-                bossRoom.col_bottom.isTrigger = true;
-                bossRoom.col_up.isTrigger = true;
-                bossRoom.col_left.isTrigger = true;
-                bossRoom.col_right.isTrigger = true;
+                    bossRoom.col_bottom.isTrigger = true;
+                    bossRoom.col_up.isTrigger = true;
+                    bossRoom.col_left.isTrigger = true;
+                    bossRoom.col_right.isTrigger = true;
+                }
+
                 //Debug.Log("Death Point: X" + transform.position.x.ToString() + " Y: " + transform.position.y.ToString());
                 for (var i = 0; i < oldgameObjects.Length; i++)
                 {
@@ -262,6 +270,8 @@ public class HealthController : MonoBehaviour
             {
                 gameObject.GetComponent<Animator>().enabled = false; ;
                 gameObject.SetActive(false);
+                enemyDead = gameObject.GetComponents<AudioSource>();
+                enemyDead[1].Play();
                 gm.currentExp += expGained;
                 gm.currency_p += currency_e;
                 var player = GameObject.Find("Player");
@@ -274,5 +284,11 @@ public class HealthController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         location.position = startPos;
+    }
+
+    IEnumerator destroyMessage()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(InstantiatedDeadMessage);
     }
 }

@@ -659,11 +659,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8629361600403505535, guid: 0dc96b3fadd623d46a45bea507d2ed7c,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629361600403505531, guid: 0dc96b3fadd623d46a45bea507d2ed7c,
+        type: 3}
+      propertyPath: firetrapSound
+      value: 
+      objectReference: {fileID: 228091342}
+    - target: {fileID: 500925360617934512, guid: 0dc96b3fadd623d46a45bea507d2ed7c,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 500925360617934512, guid: 0dc96b3fadd623d46a45bea507d2ed7c,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 500925360617934512, guid: 0dc96b3fadd623d46a45bea507d2ed7c,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dc96b3fadd623d46a45bea507d2ed7c, type: 3}
 --- !u!4 &228091341 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8629361600403505530, guid: 0dc96b3fadd623d46a45bea507d2ed7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 228091340}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &228091342 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 500925360617934512, guid: 0dc96b3fadd623d46a45bea507d2ed7c,
     type: 3}
   m_PrefabInstance: {fileID: 228091340}
   m_PrefabAsset: {fileID: 0}
@@ -2119,7 +2150,6 @@ MonoBehaviour:
   portalMessage: {fileID: 0}
   portalMessageExit: {fileID: 0}
   spawnPortalMessageOnce: 0
-  audioSources: {fileID: 0}
 --- !u!1 &621669448
 GameObject:
   m_ObjectHideFlags: 0
@@ -4281,6 +4311,21 @@ PrefabInstance:
     - target: {fileID: 315158552880982654, guid: dbf548e924e3d5a419e7c7570bfb84d8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7429123645121465195, guid: dbf548e924e3d5a419e7c7570bfb84d8,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7429123645121465195, guid: dbf548e924e3d5a419e7c7570bfb84d8,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7429123645121465195, guid: dbf548e924e3d5a419e7c7570bfb84d8,
+        type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
