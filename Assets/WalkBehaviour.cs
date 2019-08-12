@@ -15,7 +15,6 @@ public class WalkBehaviour : StateMachineBehaviour
     private float maxX;
     private float minY;
     private float maxY;
-    private float msDistance;
     private GameObject[] roomList;
     
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

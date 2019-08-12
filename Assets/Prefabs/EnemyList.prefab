@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyList:
-  - enemy: {fileID: 5362717565038208161, guid: e8dbbbdd982f36e4db476732b8c7dbd1, type: 3}
+  - enemy: {fileID: 5692939194711083710, guid: e8dbbbdd982f36e4db476732b8c7dbd1, type: 3}
     weight: 0.5
-  - enemy: {fileID: 115116774472627343, guid: 11690681801564843902facdd1c56c24, type: 3}
+  - enemy: {fileID: 4574842614908071822, guid: 11690681801564843902facdd1c56c24, type: 3}
     weight: 0.5
-  - enemy: {fileID: 8349494815033673060, guid: 15bcbc010006eb446a5e6af8c463b52b, type: 3}
+  - enemy: {fileID: 2830260093976076983, guid: 15bcbc010006eb446a5e6af8c463b52b, type: 3}
     weight: 0.5
-  - enemy: {fileID: 1945396490989579591, guid: 2a096bf417ad22949ad70a1a0beaeec6, type: 3}
+  - enemy: {fileID: 1171346873075991616, guid: 2a096bf417ad22949ad70a1a0beaeec6, type: 3}
     weight: 0.5
