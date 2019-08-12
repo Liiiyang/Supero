@@ -9,7 +9,8 @@ public class AttackBehaviour : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         waitTime = 0.667;
-
+        AudioSource[] audioSources = animator.gameObject.GetComponents<AudioSource>();
+        audioSources[1].Play();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
