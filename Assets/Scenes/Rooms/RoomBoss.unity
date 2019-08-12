@@ -242,6 +242,21 @@ PrefabInstance:
       propertyPath: m_Range
       value: 8.36
       objectReference: {fileID: 0}
+    - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8867924
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.5694946
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.5882353
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eae32763dfd13d2468ecc20421d2c5d1, type: 3}
 --- !u!4 &26770169 stripped
@@ -1853,11 +1868,11 @@ GameObject:
   - component: {fileID: 604153012}
   - component: {fileID: 604153011}
   - component: {fileID: 604153010}
-  - component: {fileID: 604153021}
   - component: {fileID: 604153007}
   - component: {fileID: 604153009}
   - component: {fileID: 604153006}
   - component: {fileID: 604153020}
+  - component: {fileID: 604153021}
   m_Layer: 0
   m_Name: Room
   m_TagString: bossRoom
@@ -2237,7 +2252,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 9.816548, y: 8.349543}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2248,7 +2263,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 15.259993, y: 2.1132393}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &604153020
 MonoBehaviour:
@@ -2291,6 +2306,7 @@ MonoBehaviour:
   portalMessageExit: {fileID: 7040679772566717749, guid: 16a18ae90ac11414886ad99ed4c98a49,
     type: 3}
   spawnPortalMessageOnce: 0
+  audioSources: {fileID: 0}
 --- !u!1 &621669448
 GameObject:
   m_ObjectHideFlags: 0
@@ -2485,12 +2501,27 @@ PrefabInstance:
     - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
         type: 3}
       propertyPath: m_Intensity
-      value: 6.77
+      value: 7.78
       objectReference: {fileID: 0}
     - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
         type: 3}
       propertyPath: m_Range
-      value: 8.76
+      value: 8.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8867924
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.5694946
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.5882353
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eae32763dfd13d2468ecc20421d2c5d1, type: 3}
@@ -2722,7 +2753,7 @@ Transform:
   m_GameObject: {fileID: 854290520}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: -0.13, z: 2.07}
-  m_LocalScale: {x: 2.13, y: 2.12, z: 1}
+  m_LocalScale: {x: 2.14, y: 2.13, z: 1}
   m_Children: []
   m_Father: {fileID: 604153008}
   m_RootOrder: 14
@@ -2764,7 +2795,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 07cd321422be3b64da570276c061c929, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2702c0fe4a27580428ed30f52871a1c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

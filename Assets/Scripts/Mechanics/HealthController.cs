@@ -30,6 +30,7 @@ public class HealthController : MonoBehaviour
     private Transform OldPosition;
     private Rigidbody2D rb2d;
     private bool savedBoss = false;
+    private AudioSource[] bossMusic;
     
 
     
@@ -157,8 +158,11 @@ public class HealthController : MonoBehaviour
         {
             if (gm.liveCounter > 0)
             {
+                bossMusic = gameObject.GetComponents<AudioSource>();
+                bossMusic[3].Pause();
+                gameManager.GetComponent<AudioSource>().Play();
                 playerisDead = true;
-                gm.liveCounter -= 1;
+            
                 var bossRoom = GameObject.FindWithTag("bossRoom").GetComponent<PortalController>();
 
                 bossRoom.spawnBoss = true;
@@ -222,6 +226,7 @@ public class HealthController : MonoBehaviour
 
                     }
                 }
+                gm.liveCounter -= 1;
               
             }
             else
@@ -247,7 +252,9 @@ public class HealthController : MonoBehaviour
             bossRoom.col_bottom.isTrigger = true;
             bossRoom.col_up.isTrigger = true;
             bossRoom.col_left.isTrigger = true;
-            bossRoom.col_right.isTrigger = true;           
+            bossRoom.col_right.isTrigger = true;
+            //var player = GameObject.Find("Player");
+            player.GetComponent<Animator>().SetBool("damage", false);
         }
         else
         {
@@ -257,6 +264,8 @@ public class HealthController : MonoBehaviour
                 gameObject.SetActive(false);
                 gm.currentExp += expGained;
                 gm.currency_p += currency_e;
+                var player = GameObject.Find("Player");
+                player.GetComponent<Animator>().SetBool("damage", false);
             }
         }  
     }

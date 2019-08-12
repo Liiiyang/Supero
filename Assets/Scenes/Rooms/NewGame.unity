@@ -1204,6 +1204,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomController: {fileID: 3449611848654651130, guid: 60f29db3b5e72ca4bb289e1ddf5daf3e,
     type: 3}
+  saveProgressText: {fileID: 7040679772566717749, guid: c0293908f82c80645ad1922a7ad60a9c,
+    type: 3}
   currencyText: {fileID: 727984792}
   potionText: {fileID: 1667741761}
   liveCounterText: {fileID: 742668800}

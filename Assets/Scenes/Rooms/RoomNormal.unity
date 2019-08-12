@@ -242,6 +242,21 @@ PrefabInstance:
       propertyPath: m_Range
       value: 8.36
       objectReference: {fileID: 0}
+    - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8867924
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.5694946
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.5882353
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eae32763dfd13d2468ecc20421d2c5d1, type: 3}
 --- !u!4 &26770169 stripped
@@ -1771,8 +1786,8 @@ Transform:
   - {fileID: 26770169}
   - {fileID: 532527090}
   - {fileID: 1871281346}
-  - {fileID: 228091341}
   - {fileID: 1829569347}
+  - {fileID: 228091341}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2104,6 +2119,7 @@ MonoBehaviour:
   portalMessage: {fileID: 0}
   portalMessageExit: {fileID: 0}
   spawnPortalMessageOnce: 0
+  audioSources: {fileID: 0}
 --- !u!1 &621669448
 GameObject:
   m_ObjectHideFlags: 0
@@ -2298,12 +2314,27 @@ PrefabInstance:
     - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
         type: 3}
       propertyPath: m_Intensity
-      value: 6.77
+      value: 7.78
       objectReference: {fileID: 0}
     - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
         type: 3}
       propertyPath: m_Range
-      value: 8.76
+      value: 8.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8867924
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.5694946
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749581133423670025, guid: eae32763dfd13d2468ecc20421d2c5d1,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.5882353
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eae32763dfd13d2468ecc20421d2c5d1, type: 3}
@@ -2535,7 +2566,7 @@ Transform:
   m_GameObject: {fileID: 854290520}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: -0.13, z: 2.07}
-  m_LocalScale: {x: 2.13, y: 2.12, z: 1}
+  m_LocalScale: {x: 2.14, y: 2.13, z: 1}
   m_Children: []
   m_Father: {fileID: 604153008}
   m_RootOrder: 14
@@ -2557,7 +2588,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c2ccbf750641a924f960a84443504a3a, type: 2}
+  - {fileID: 2100000, guid: b54ae5616805fac41812865f1a52cfd2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2577,7 +2608,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 07cd321422be3b64da570276c061c929, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2702c0fe4a27580428ed30f52871a1c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4082,7 +4113,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 604153008}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1829569348
 MonoBehaviour:

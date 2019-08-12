@@ -963,7 +963,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e32462e8b0650304b83e5d024f4d9cc0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -981,7 +981,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 589903813
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: def712409ee977c43a31ef45eb238e03, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1074,6 +1074,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldgameObjects: []
   savedGameObjects: []
+  boss: {fileID: 0}
+  instance: {fileID: 0}
   isBossDead: 0
   fullHealthColor: {r: 1, g: 0, b: 0, a: 1}
   zeroHealthColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -1082,6 +1084,8 @@ MonoBehaviour:
   ghost: {fileID: 0}
   oddDeaths: 0
   transition: {fileID: 0}
+  playerisDead: 0
+  currentHealth: 0
 --- !u!114 &7994453426353259588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1104,6 +1108,7 @@ MonoBehaviour:
   zeroStaminaColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   slider: {fileID: 7632899718766558796}
   FillImage: {fileID: 6322012809154894955}
+  attack_Sound: {fileID: 0}
 --- !u!1 &9133045669746578296
 GameObject:
   m_ObjectHideFlags: 0

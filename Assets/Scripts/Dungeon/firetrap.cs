@@ -20,7 +20,7 @@ public class firetrap : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log("Who is hit: " + other.gameObject.name);
-        if (other.gameObject.name != "ghost(Clone)")
+        if (other.gameObject.tag == "enemy")
         {
             other.gameObject.GetComponent<HealthController>().TakeDamage(flameDamage);
         }

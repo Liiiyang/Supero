@@ -48,5 +48,7 @@ MonoBehaviour:
     weight: 0.5
   - boss: {fileID: 5766997255925167129, guid: dfe161752e2d3ae4db60cea89dfed61a, type: 3}
     weight: 0.5
+  - boss: {fileID: 5354977282336949751, guid: 68679640a47f55649aca91bf4147070b, type: 3}
+    weight: 0.5
   - boss: {fileID: 1285135223057772242, guid: 6aef9e46842f00645b906e2d1dd2d6cd, type: 3}
     weight: 0.5

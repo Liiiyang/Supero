@@ -15,6 +15,9 @@ public class MenuButton : MonoBehaviour
     int thisIndex;
 
     private GameObject playerUI;
+    private static MenuButton instance = null;
+    private int stage;
+    private float initialHealth;
 
     // Update is called once per frame
     void Update()
@@ -61,6 +64,13 @@ public class MenuButton : MonoBehaviour
             SceneManager.LoadScene("Tutorial");
 
         }
+        else if (gameObject.name == "Continue")
+        {
+            Destroy(GameObject.Find("MainMenu"));
+            StaticSaveFile.save = "save";
+            SceneManager.LoadScene("NewGame");
+        }
 
     }
+
 }

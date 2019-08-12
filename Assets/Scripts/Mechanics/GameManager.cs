@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject roomController;
+    public GameObject roomController,saveProgressText;
     public TextMeshProUGUI currencyText, potionText, liveCounterText;
     public int stage;
     public float initialHealth_p, initialHealth_e, initialHealth_b, regenHealth, currentHealth_p, currentHealth_e, currentHealth_b;
@@ -20,45 +20,61 @@ public class GameManager : MonoBehaviour
     public int currency_p, currency_e, currency_b, saved_currency, current_currency;
     public bool rebuild = false;
     public int liveCounter,currentPotions;
+    public AudioSource levelMusic;
 
     private GameObject[] resetEnemies, resetObstacles;
     private GameObject player;
+    private string save_button;
+    private GameObject InstantiatedsaveMessage;
+    private bool spawnMessageOnce = false;
 
     void Awake()
     {
-        initialHealth_p = 1000f;
-        totalExp = 500;
+        Debug.Log("Save Test: " + StaticSaveFile.save);
+        if (StaticSaveFile.save == "save")
+        {
+            playerData data = SaveSystem.LoadPlayer();
+            stage = data.stage;
+        }
+        else
+        {
+            stage = 1;
+        }
+
+        initialHealth_p = ((stage - 1) * 100f) + 400f;
+        totalExp = ((stage - 1) * 50) + 500;
         currentExp = 0;
 
-        initialHealth_e = 73f;
+        initialHealth_e = ((stage - 1) * 50f) + 73f;
         expGained_e = 10;
 
         initialHealth_b = 100f;
         expGained_b = 550;
 
-        totalStamina_p = 93f;
-        attackDamage_p = 73f;
-        stamina_p = 19f;
-        regenRate_p = 40f;
+        totalStamina_p = ((stage - 1)* 2f)+ 93f;
+        attackDamage_p = ((stage - 1)* 20f)+ 73f;
+        stamina_p = ((stage - 1)* 4f)+ 19f;
+        regenRate_p =((stage - 1)* 20f)+ 40f;
 
-        totalStamina_e = 400f;
-        attackDamage_e = 60f;
-        stamina_e = 60f;
-        regenRate_e = 30f;
+        totalStamina_e = ((stage - 1)* 10f) + 400f;
+        attackDamage_e = ((stage - 1)* 10f) + 60f;
+        stamina_e = ((stage - 1)*  10f) + 60f;
+        regenRate_e = ((stage - 1)* 15f) + 30f;
 
-        totalStamina_b = 1000f;
-        attackDamage_b = 80f;
-        stamina_b = 120f;
-        regenRate_b = 40f;
+        totalStamina_b = ((stage - 1)* 500f) + 1000f;
+        attackDamage_b = ((stage - 1)* 40f) + 80f;
+        stamina_b = ((stage - 1)* 50f) + 120f;
+        regenRate_b = ((stage - 1)* 20f) + 40f;
 
         currency_p = 0;
         current_currency = 0;
         saved_currency = 0;
-        currency_e = 100;
-        currency_b = 2000;
+        currency_e = ((stage - 1)* 10)+  10;
+        currency_b = ((stage - 1)* 100) + 100;
 
-        currentPotions = 5;
-        regenHealth = 250f;
+        currentPotions = ((stage - 1)* 2) + 5;
+        regenHealth = ((stage - 1)+ 70) + 250f;
+
         currentHealth_p = initialHealth_p;
         currentHealth_e = initialHealth_e;
         currentHealth_b = initialHealth_b;
@@ -72,18 +88,35 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stage = 1;
         player = GameObject.Find("Player");
         liveCounterText.text = "0" + liveCounter.ToString();
+        save_button = "Save";
+        levelMusic.GetComponent<AudioSource>();
+        levelMusic.loop = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("Save"))
+        {
+            if (!spawnMessageOnce)
+            {
+                InstantiatedsaveMessage = Instantiate(saveProgressText, transform.position, Quaternion.identity) as GameObject;
+                SaveSystem.SavePlayer(this);
+                spawnMessageOnce = true;
+                StartCoroutine(destroyMessage());
+            }
+
+
+
+        }
+
         //if boss have been defeated and the player has interacted with the portal,
         //re-instantiate RoomController to generate new map
         if (rebuild)
         {
+            
             if (SceneManager.GetActiveScene().name == "Tutorial")
             {
                 SceneManager.LoadScene("NewGame");
@@ -141,17 +174,22 @@ public class GameManager : MonoBehaviour
 
             currentPotions += 2;
             regenHealth += 70;
+            SaveSystem.SavePlayer(this);
         }
 
         if (currentExp >= totalExp)
         {
-            currentExp -= totalExp;
-            totalExp += 50;
-            initialHealth_p += 100f;
-            totalStamina_p += 2f;
-            attackDamage_p += 20f;
-            stamina_p += 4f;
-            regenRate_p += 20f;           
+            if (stage != 1)
+            {
+                currentExp -= totalExp;
+                totalExp += ((stage - 1) * 50);
+                initialHealth_p += ((stage - 1)* 100f);
+                totalStamina_p += ((stage - 1)* 2f);
+                attackDamage_p += ((stage - 1)* 20f);
+                stamina_p += ((stage - 1)* 4f);
+                regenRate_p += ((stage - 1)* 20f); 
+            }
+          
         }
 
         // Currency Mechanics showing slow increment of currency in the UI
@@ -189,4 +227,12 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Instantiate(roomController);
     }
+
+    IEnumerator destroyMessage()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(InstantiatedsaveMessage);
+        spawnMessageOnce = false;
+    }
+
 }

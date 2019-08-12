@@ -74,6 +74,10 @@ public class RoomController : MonoBehaviour
             if (!createBossRoom)
             {
                 StartCoroutine(CreateBossRoom());
+                
+            }
+            else if (!createHiddenRoom)
+            {
                 StartCoroutine(CreateHiddenRoom());
             }
             else if (createBossRoom && createHiddenRoom && !updatedRoom)
@@ -99,7 +103,7 @@ public class RoomController : MonoBehaviour
         if(roomQueue.Count == 0 || finishedQueueing)
         {
             Room bossRoom = roomList[roomList.Count - 1];
-            if((bossRoom.x>2 ||bossRoom.x<-2) || (bossRoom.y>2 || bossRoom.y<-2))
+            if((bossRoom.x>1 ||bossRoom.x<-1) || (bossRoom.y>1 || bossRoom.y<-1))
             {
                 Debug.Log("Boss Room");
                 Room tempRoom = new Room(bossRoom.x, bossRoom.y);
@@ -114,7 +118,7 @@ public class RoomController : MonoBehaviour
     IEnumerator CreateHiddenRoom()
     {
         createHiddenRoom = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         if(roomQueue.Count == 0 && isBossRoomCreated)
         {
             Room hiddenRoom = roomList[roomList.Count - 2];

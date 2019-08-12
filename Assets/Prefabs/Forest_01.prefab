@@ -709,6 +709,72 @@ RectTransform:
   m_AnchoredPosition: {x: 0.47999954, y: 0}
   m_SizeDelta: {x: -9.04, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &4966193650359151589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4733564782418958232}
+  - component: {fileID: 5087409692693352290}
+  - component: {fileID: 897083346334542117}
+  m_Layer: 0
+  m_Name: Forest_01_projectile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4733564782418958232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4966193650359151589}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6481532127471399134}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5087409692693352290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4966193650359151589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a25a8b4125b736f4898ebc25156d4caa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 35
+  distance: 20
+  foundPlayer: 0
+  projectile: {fileID: 8021843063514560948, guid: 023e277165f5fc74badccd501f8fc4d5,
+    type: 3}
+  startTimeBtwShots: 2
+--- !u!58 &897083346334542117
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4966193650359151589}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.33846423, y: -0.0066297054}
+  serializedVersion: 2
+  m_Radius: 0.15490606
 --- !u!1 &5347918452422624395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,6 +1069,8 @@ GameObject:
   - component: {fileID: 3891712396063038002}
   - component: {fileID: -3860711412618708524}
   - component: {fileID: 5483179802533990566}
+  - component: {fileID: 7101123182560495893}
+  - component: {fileID: 1846735011977960866}
   m_Layer: 8
   m_Name: Forest_01
   m_TagString: boss
@@ -1024,6 +1092,7 @@ Transform:
   - {fileID: 797270319339146546}
   - {fileID: 6867627030356751476}
   - {fileID: 4546722744528067909}
+  - {fileID: 4733564782418958232}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1044,7 +1113,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6740755ba610b624bae3299516040d57, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1170,8 +1239,10 @@ MonoBehaviour:
   col_up: {fileID: 3119314664002199538}
   col_right: {fileID: 3119314664002199538}
   spawnBoss: 0
-  portalMessage: {fileID: 0}
-  portalMessageExit: {fileID: 0}
+  portalMessage: {fileID: 7040679772566717749, guid: 25ba722af8b484046ba18ab3438ca17a,
+    type: 3}
+  portalMessageExit: {fileID: 7040679772566717749, guid: 16a18ae90ac11414886ad99ed4c98a49,
+    type: 3}
   spawnPortalMessageOnce: 0
 --- !u!114 &6707696056347605137
 MonoBehaviour:
@@ -1330,6 +1401,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7101123182560495893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6481532127471399123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66e6a5fa369802745bc24e4eb73b6bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 8021843063514560948, guid: 023e277165f5fc74badccd501f8fc4d5,
+    type: 3}
+  startTimeBtwShots: 2
+--- !u!58 &1846735011977960866
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6481532127471399123}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &6881519097234176539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,12 +1795,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dff350f103b5d354fba17db6fe675762, type: 3}
---- !u!224 &2437240982038015791 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2451841277611726407, guid: dff350f103b5d354fba17db6fe675762,
-    type: 3}
-  m_PrefabInstance: {fileID: 275952560841013608}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2437240982038015789 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2451841277611726405, guid: dff350f103b5d354fba17db6fe675762,
@@ -1711,3 +1807,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &2437240982038015791 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2451841277611726407, guid: dff350f103b5d354fba17db6fe675762,
+    type: 3}
+  m_PrefabInstance: {fileID: 275952560841013608}
+  m_PrefabAsset: {fileID: 0}

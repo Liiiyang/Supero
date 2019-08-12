@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public Image FillImage;
     public GameObject chestMessage, currencyMessage, hiddenMessage, shopMessage;
     public AudioSource heal_Sound, portal_Sound;
-    public Animator starting;
+    public Animator playerAnimator;
 
     private Rigidbody2D rb2d;
     private Vector2 moveVelocity;
@@ -30,11 +30,10 @@ public class PlayerController : MonoBehaviour
     private GameObject InstantiatedchestMessage, InstantiatedcurrencyMessage, InstantiatedhiddenMessage, InstantiatedshopMessage;
     private bool spawnChestMessageOnce, spawnCurrencyMessageOnce, spawnhiddenMessageOnce, spawnshopMessageOnce;
     private Material rightSide;
+    
 
     void Start()
     {
-
-        starting.SetBool("exit",true);
         rb2d = GetComponent<Rigidbody2D>();
         gameManager = GameObject.Find("GameManager");
         gm = gameManager.GetComponent<GameManager>();
@@ -42,6 +41,7 @@ public class PlayerController : MonoBehaviour
         action_button = "Action";
         heal_button = "Heal";
         facingRight = true;
+        
         //rightSide = this.GetComponent<SpriteRenderer>().material;
     }
 
@@ -53,6 +53,18 @@ public class PlayerController : MonoBehaviour
 
         //Store the current vertical input in the float moveVertical.
         float moveVertical = Input.GetAxis("Vertical");
+
+        //Controls walking animation for player
+        if (moveHorizontal > 0 || moveVertical > 0)
+        {
+            playerAnimator.SetBool("walk", true);
+            if (moveHorizontal > moveVertical) { playerAnimator.SetFloat("speed", moveHorizontal); }
+            else { playerAnimator.SetFloat("speed", moveVertical); }
+        }
+        else
+        {
+            playerAnimator.SetBool("walk", false);
+        }
 
         //Use the two store floats to create a new Vector2 variable movement.
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
@@ -101,8 +113,6 @@ public class PlayerController : MonoBehaviour
     IEnumerator destroyAnimation()
     {
         yield return new WaitForSeconds(1.5f);
-        //Destroy(starting);
-        starting.enabled = false;
         portal_Sound.Stop();
     }
 

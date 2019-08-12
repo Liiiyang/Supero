@@ -16,6 +16,7 @@ public class AttackController : MonoBehaviour
     public Slider slider;
     public Image FillImage;
     public AudioSource attack_Sound;
+    public Animator player_attack;
    
 
     private float stamina,regenRate;
@@ -89,6 +90,7 @@ public class AttackController : MonoBehaviour
             if (Input.GetButtonDown(attack_button))
             {
                 attack_Sound.Play();
+                player_attack.SetBool("attack", true);
                 currentStamina -= gm.stamina_p;
                 gm.currentStamina_p = currentStamina;
                 SetStaminaUI();
@@ -113,6 +115,11 @@ public class AttackController : MonoBehaviour
             if (gm.currentHealth_p == 0)
             {
                 currentStamina = gm.totalStamina_p;
+            }
+
+            if (Input.GetKeyUp(KeyCode.J))
+            {
+                player_attack.SetBool("attack",false);
             }
         }
 
@@ -146,12 +153,20 @@ public class AttackController : MonoBehaviour
                     // Can only attack with sufficient stamina else there is a cooldown
                     if (gameObject.GetComponent<Animator>().GetBool("isAttacking"))
                     {
+                        var player = GameObject.Find("Player");
+                        player.GetComponent<Animator>().SetBool("damage", true);
                         attackEnemy[i].GetComponent<HealthController>().TakeDamage(attackDamage);
                     }
                     currentStamina -= stamina;
                     gm.currentStamina_e = currentStamina;
                     SetStaminaUI();
                     StaminaRegenTimer = 0.0f;
+                }
+                else
+                {
+
+                    var player = GameObject.Find("Player");
+                    player.GetComponent<Animator>().SetBool("damage", false);
                 }
             }
             timebtwAttack = startTimebtwAttack;
@@ -187,12 +202,21 @@ public class AttackController : MonoBehaviour
                 if (gameObject.tag == "boss")
                 {
                     // Can only attack with sufficient stamina else there is a cooldown
+                    var player1 = GameObject.Find("Player");
+                    player1.GetComponent<Animator>().SetBool("bossDamage", true);
                     attackEnemy[i].GetComponent<HealthController>().TakeDamage(attackDamage);
                     currentStamina -= stamina;
                     gm.currentStamina_b = currentStamina;
                     SetStaminaUI();
                     StaminaRegenTimer = 0.0f;
                 }
+                else
+                {
+
+                    var player1 = GameObject.Find("Player");
+                    player1.GetComponent<Animator>().SetBool("BossDamage", true);
+                }
+               
             }
         }
 

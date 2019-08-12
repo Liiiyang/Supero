@@ -55,6 +55,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\EndlessCaveAmbience\demos\demo scripts\DebugConsole.cs" />
+     <Compile Include="Assets\EndlessCaveAmbience\demos\demo scripts\MixControl.cs" />
+     <Compile Include="Assets\EndlessCaveAmbience\demos\demo scripts\RandomMusicDemo.cs" />
+     <Compile Include="Assets\EndlessCaveAmbience\scripts\RandomMusic.cs" />
      <Compile Include="Assets\Scripts\Dungeon\Door.cs" />
      <Compile Include="Assets\Scripts\Dungeon\DungeonController.cs" />
      <Compile Include="Assets\Scripts\Dungeon\DungeonCrawler.cs" />
@@ -71,9 +75,12 @@
      <Compile Include="Assets\Scripts\Enemies\FollowBehaviour.cs" />
      <Compile Include="Assets\Scripts\Enemies\Forest_01_Projectile.cs" />
      <Compile Include="Assets\Scripts\Enemies\Forest_05_Projectile.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Forest_07_Projectile.cs" />
      <Compile Include="Assets\Scripts\Enemies\Forest_08_Projectile.cs" />
      <Compile Include="Assets\Scripts\Enemies\IdleBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\projectile.cs" />
      <Compile Include="Assets\Scripts\Enemies\resetPosition.cs" />
+     <Compile Include="Assets\Scripts\Enemies\rotate_raycast.cs" />
      <Compile Include="Assets\Scripts\Enemies\WalkBehaviour.cs" />
      <Compile Include="Assets\Scripts\Enemies\WalkBehaviourBoss.cs" />
      <Compile Include="Assets\Scripts\Items\chestController.cs" />
@@ -84,10 +91,14 @@
      <Compile Include="Assets\Scripts\Mechanics\ObjectData.cs" />
      <Compile Include="Assets\Scripts\Mechanics\ObjectGenerator.cs" />
      <Compile Include="Assets\Scripts\Mechanics\PortalController.cs" />
+     <Compile Include="Assets\Scripts\Mechanics\ProjectileAttacks.cs" />
      <Compile Include="Assets\Scripts\Mechanics\RandomSpawnTest.cs" />
      <Compile Include="Assets\Scripts\Menu\AnimatorFunctions.cs" />
      <Compile Include="Assets\Scripts\Menu\MenuButton.cs" />
      <Compile Include="Assets\Scripts\Menu\MenuButtonController.cs" />
+     <Compile Include="Assets\Scripts\Menu\playerData.cs" />
+     <Compile Include="Assets\Scripts\Menu\SaveSystem.cs" />
+     <Compile Include="Assets\Scripts\Menu\StaticSaveFile.cs" />
      <Compile Include="Assets\Scripts\Player\CameraController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\TooCubeForest\demoScenes\Movement.cs" />
@@ -96,6 +107,8 @@
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
      <None Include="Assets\Materials\normalMapModified.shader" />
+     <None Include="Assets\The combat collection STARTER\the combat collection.txt" />
+     <None Include="Assets\EndlessCaveAmbience\demos\demo scripts\DebugConsoleLicence.txt" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />

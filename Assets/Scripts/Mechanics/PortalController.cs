@@ -13,16 +13,23 @@ public class PortalController : MonoBehaviour
     public bool spawnBoss;
     public GameObject portalMessage, portalMessageExit;
     public bool spawnPortalMessageOnce;
+    private AudioSource[] audioSources;
 
     private GameObject bossRoom;
     private string action_button;
     private bool nextLevel;
     private bool pressed = false;
     private GameObject InstantiatedportalMessage, InstantiatedportalMessageExit;
-    private Transform portalPosition;
     private GameObject player;
     private HealthController hc;
-    
+    private Transform playerPosition;
+    private float minX;
+    private float maxX;
+    private float minY;
+    private float maxY;
+    private float msDistance;
+    private GameObject bossRoomPosition;
+    private Room roomScript;
 
 
     // Start is called before the first frame update
@@ -63,35 +70,69 @@ public class PortalController : MonoBehaviour
         {
             Debug.Log("pressed Once");
         }
+
+        var bossMusic = GameObject.Find("Player");
+        audioSources = bossMusic.GetComponents<AudioSource>();
+        if (!audioSources[3].isPlaying)
+        {
+            bossRoomPosition = GameObject.FindGameObjectWithTag("bossRoom");
+            playerPosition = GameObject.FindGameObjectWithTag("Player").transform;
+            if (bossRoomPosition != null && pressed)
+            {
+                roomScript = bossRoomPosition.GetComponent<Room>();
+                minX = roomScript.leftwall.transform.position.x + 8;
+                maxX = roomScript.rightwall.transform.position.x - 8;
+                minY = roomScript.bottomwall.transform.position.y + 8;
+                maxY = roomScript.topwall.transform.position.y - 8;
+                if (playerPosition.position.x > minX && playerPosition.position.x < maxX && playerPosition.position.y > minY && playerPosition.position.y < maxY)
+                {
+                    var levelMusic = GameObject.Find("GameManager").GetComponent<AudioSource>();
+                    levelMusic.Pause();
+                    audioSources[3].Play();
+
+                }
+            }
+            
+
+        }
+        
+        
     }
 
     void OnCollisionStay2D(Collision2D other)
     {
         Debug.Log("Collided: " + other.gameObject.name);
-        if (other.gameObject.name == "portal" && !spawnPortalMessageOnce)
+        if (gameObject.name == "Player")
         {
-            if (!nextLevel)
+            if (other.gameObject.name == "portal" && !spawnPortalMessageOnce)
             {
-                InstantiatedportalMessage = Instantiate(portalMessage, transform.position, Quaternion.identity) as GameObject;
-                spawnPortalMessageOnce = true;
-            }
-            else
-            {
+                if (!nextLevel)
+                {
+                    InstantiatedportalMessage = Instantiate(portalMessage, transform.position, Quaternion.identity) as GameObject;
+                    spawnPortalMessageOnce = true;
+                }
+                else
+                {
 
-                InstantiatedportalMessageExit = Instantiate(portalMessageExit, transform.position, Quaternion.identity) as GameObject;
-                spawnPortalMessageOnce = true;
+                    InstantiatedportalMessageExit = Instantiate(portalMessageExit, transform.position, Quaternion.identity) as GameObject;
+                    spawnPortalMessageOnce = true;
+                }
+
             }
-            
         }
         if (other.gameObject.name == "portal" && Input.GetButtonDown(action_button))
         {
             //Spawns the Boss the first time it is pressed, and all doors will be closed
             if (!pressed)
             {
+                var bossMusic = GameObject.Find("Player");
+                audioSources = bossMusic.GetComponents<AudioSource>();
+                audioSources[3].Play();
+                var levelMusic = GameObject.Find("GameManager").GetComponent<AudioSource>();
+                levelMusic.Pause();
                 spawnBoss = true;
                 pressed = true;
 
-                portalPosition = gameObject.transform;
                 var bossRoom = GameObject.FindWithTag("bossRoom").GetComponent<PortalController>();
 
                 bossRoom.spawnBoss = true;

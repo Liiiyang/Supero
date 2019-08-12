@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TutorialDungeonData
   m_EditorClassIdentifier: 
   numberofCrawlers: 2
-  iterationMin: 6
-  iterationMax: 10
+  iterationMin: 8
+  iterationMax: 12
