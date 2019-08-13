@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8602315535413441160
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e5c9125e8338f24da894346dfd75ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangeToPlayer: 7
+  speed: 7
 --- !u!1102 &-8178782812108455862
 AnimatorState:
   serializedVersion: 5
@@ -14,7 +28,7 @@ AnimatorState:
   - {fileID: 430296090164811642}
   - {fileID: 4209070531823538114}
   m_StateMachineBehaviours:
-  - {fileID: 5972862841213257876}
+  - {fileID: -8602315535413441160}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -282,7 +296,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: -4552308243452642056}
   m_StateMachineBehaviours:
-  - {fileID: 3982528068629228278}
+  - {fileID: 4189309990152318147}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -297,7 +311,7 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!114 &3982528068629228278
+--- !u!114 &4189309990152318147
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -306,7 +320,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1b0f046306d6ab4b990262763b0ae38, type: 3}
+  m_Script: {fileID: 11500000, guid: df0a36bad9e580e4895f0dc35e2a3c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1101 &4209070531823538114
@@ -402,17 +416,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startWaitTime: 3
   rangeToPlayer: 7
---- !u!114 &5972862841213257876
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eef36c18600eada46b676d1df709a9ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rangeToPlayer: 7
-  speed: 7

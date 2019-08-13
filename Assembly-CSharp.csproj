@@ -70,6 +70,7 @@
      <Compile Include="Assets\Scripts\Dungeon\RoomController.cs" />
      <Compile Include="Assets\Scripts\Enemies\AlertBehaviour.cs" />
      <Compile Include="Assets\Scripts\Enemies\AttackBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemies\AttackBehaviourBoss.cs" />
      <Compile Include="Assets\Scripts\Enemies\BossList.cs" />
      <Compile Include="Assets\Scripts\Enemies\DesertController.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyList.cs" />
@@ -102,6 +103,8 @@
      <Compile Include="Assets\Scripts\Menu\StaticSaveFile.cs" />
      <Compile Include="Assets\Scripts\Player\CameraController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Shop\SampleButton.cs" />
+     <Compile Include="Assets\Scripts\Shop\TestShopScrollList.cs" />
      <Compile Include="Assets\TooCubeForest\demoScenes\Movement.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
@@ -121,6 +124,7 @@
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+     <None Include="Assets\FreePixelGear\ReadMe.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />

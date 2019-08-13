@@ -917,11 +917,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6921129797437687585, guid: 6f3097d4fb780b04ba60d77758ec3d89,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 696013473443716105, guid: 6f3097d4fb780b04ba60d77758ec3d89,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -937,6 +932,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6320adf115042fe4294f8e3e56956fd0, type: 2}
+    - target: {fileID: 6921129797437687585, guid: 6f3097d4fb780b04ba60d77758ec3d89,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f3097d4fb780b04ba60d77758ec3d89, type: 3}
 --- !u!4 &323789639 stripped
@@ -1708,7 +1708,7 @@ GameObject:
   - component: {fileID: 604153007}
   m_Layer: 0
   m_Name: Room
-  m_TagString: start
+  m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

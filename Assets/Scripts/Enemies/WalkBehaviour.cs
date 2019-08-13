@@ -15,13 +15,12 @@ public class WalkBehaviour : StateMachineBehaviour
     private float maxX;
     private float minY;
     private float maxY;
-    private float msDistance;
     private GameObject[] roomList;
-    
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        roomList = GameObject.FindGameObjectsWithTag("normal");
+        roomList = GameObject.FindGameObjectsWithTag("Room");
         playerPosition = GameObject.FindGameObjectWithTag("Player").transform;
         Transform animatorPos = animator.transform;
         GameObject moveSpotGO = new GameObject();
@@ -29,13 +28,13 @@ public class WalkBehaviour : StateMachineBehaviour
         foreach (GameObject room in roomList)
         {
             Room roomScript = room.GetComponent<Room>();
-            minX = roomScript.leftDoor.transform.position.x + 1;
-            maxX = roomScript.rightDoor.transform.position.x -1;
-            minY = roomScript.bottomDoor.transform.position.y + 1;
-            maxY = roomScript.topDoor.transform.position.y - 1;
-            if (animatorPos.position.x>minX && animatorPos.position.x<maxX && animatorPos.position.y>minY && animatorPos.position.y < maxY)
+            minX = roomScript.leftDoor.transform.position.x;
+            maxX = roomScript.rightDoor.transform.position.x;
+            minY = roomScript.bottomDoor.transform.position.y;
+            maxY = roomScript.topDoor.transform.position.y;
+            if (animatorPos.position.x > minX && animatorPos.position.x < maxX && animatorPos.position.y > minY && animatorPos.position.y < maxY)
             {
-                moveSpot.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+                moveSpot.position = new Vector2(Random.Range(minX + 5, maxX - 5), Random.Range(minY + 5, maxY - 5));
             }
         }
     }
@@ -43,6 +42,10 @@ public class WalkBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (moveSpot.position.x == 0 && moveSpot.position.y == 0)
+        {
+            animator.SetBool("isIdle", true);
+        }
         animator.transform.position = Vector2.MoveTowards(animator.transform.position, moveSpot.position, speed * Time.deltaTime);
         if (Vector2.Distance(animator.transform.position, moveSpot.position) < 0.2f)
         {

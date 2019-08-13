@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public bool rebuild = false;
     public int liveCounter,currentPotions;
     public AudioSource levelMusic;
+    public List<Item> currentShopList;
 
     private GameObject[] resetEnemies, resetObstacles;
     private GameObject player;
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
         currentExp = 0;
 
         initialHealth_e = ((stage - 1) * 50f) + 73f;
-        expGained_e = 550;
+        expGained_e = 50;
 
         initialHealth_b = 100f;
         expGained_b = 50;
@@ -184,7 +185,8 @@ public class GameManager : MonoBehaviour
             if (!spawnLevelupOnce)
             {
                 InstantiatedLevelupMessage = Instantiate(levelupText, transform.position, Quaternion.identity) as GameObject;
-                StartCoroutine(destroyMessage());
+                spawnLevelupOnce = true;
+                Invoke("destroyLevelupMessage", 2f);
             }
             if (stage != 1)
             {
@@ -242,11 +244,10 @@ public class GameManager : MonoBehaviour
         spawnMessageOnce = false;
     }
 
-        IEnumerator destroyLevelupMessage()
+    private void destroyLevelupMessage()
     {
-        yield return new WaitForSeconds(2f);
         Destroy(InstantiatedLevelupMessage);
-        spawnLevelupOnce = false;
+        
     }
 
    

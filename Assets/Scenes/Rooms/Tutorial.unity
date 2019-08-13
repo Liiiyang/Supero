@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 176437277}
   m_Layer: 0
   m_Name: shopkeeper
-  m_TagString: Untagged
+  m_TagString: shopkeeper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1249,6 +1249,7 @@ MonoBehaviour:
   liveCounter: 0
   currentPotions: 0
   levelMusic: {fileID: 941267271}
+  currentShopList: []
 --- !u!4 &941267270
 Transform:
   m_ObjectHideFlags: 0
@@ -2630,6 +2631,7 @@ MonoBehaviour:
   speed: 10
   activateChest: 0
   chest: {fileID: 8820015092966215424, guid: 565683f737d082d4c896bcf209a9460c, type: 3}
+  shop: {fileID: 4152946596599221455, guid: f8dbc1c796e02864199c9a1a4e61d334, type: 3}
   fullHealthColor: {r: 1, g: 0, b: 0, a: 1}
   zeroHealthColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   slider: {fileID: 753320584}
@@ -2771,6 +2773,8 @@ MonoBehaviour:
   oldgameObjects: []
   savedGameObjects: []
   deadMessage: {fileID: 3364829407278302543, guid: 6a0f32212faaeb44da89ae4df28e5329,
+    type: 3}
+  bossdefeatedMessage: {fileID: 4678132524681900481, guid: 91d30f3bf42fd7a418f65b760568b71e,
     type: 3}
   boss: {fileID: 0}
   instance: {fileID: 0}

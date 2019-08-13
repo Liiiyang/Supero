@@ -9,7 +9,7 @@ public class HealthController : MonoBehaviour
 {
     public GameObject[] oldgameObjects;
     public GameObject[] savedGameObjects;
-    public GameObject deadMessage;
+    public GameObject deadMessage,bossdefeatedMessage;
     public GameObject boss, instance;
     public bool isBossDead;
     public Color fullHealthColor = Color.red;
@@ -33,11 +33,8 @@ public class HealthController : MonoBehaviour
     private bool savedBoss = false;
     private AudioSource[] bossMusic;
     private AudioSource[] enemyDead;
-    private GameObject InstantiatedDeadMessage;
-    
-
-    
-    
+    private GameObject InstantiatedDeadMessage, Instantiatedbossdefeated;
+    private bool bossdefeated = false;
     
     Vector3 startPos;
 
@@ -162,7 +159,7 @@ public class HealthController : MonoBehaviour
             if (gm.liveCounter > 0)
             {
                 InstantiatedDeadMessage = Instantiate(deadMessage, transform.position, Quaternion.identity) as GameObject;
-                StartCoroutine(destroyMessage());
+                Invoke("destroyMessage", 2f);
                 bossMusic = gameObject.GetComponents<AudioSource>();
                 bossMusic[3].Pause();
                 gameManager.GetComponent<AudioSource>().Play();
@@ -247,6 +244,12 @@ public class HealthController : MonoBehaviour
             
             //If boss dies, despawn and send bool to player so he can toggle checkpoint again to 
             //go next stage
+            if (!bossdefeated)
+            {
+                Instantiatedbossdefeated = Instantiate(bossdefeatedMessage, transform.position, Quaternion.identity) as GameObject;
+                bossdefeated = true;
+                Invoke("destroybossMessage", 2f);
+            }
             gameObject.SetActive(false);
             gm.currentExp += expGained;
             gm.currency_p += currency_b;
@@ -286,9 +289,13 @@ public class HealthController : MonoBehaviour
         location.position = startPos;
     }
 
-    IEnumerator destroyMessage()
+    private void destroyMessage()
     {
-        yield return new WaitForSeconds(0.5f);
         Destroy(InstantiatedDeadMessage);
+    }
+    private void destroybossMessage()
+    {
+        Destroy(Instantiatedbossdefeated);
+        bossdefeated = false;
     }
 }

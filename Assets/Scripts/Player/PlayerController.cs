@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed;
     public bool activateChest;
-    public GameObject chest;
+    public GameObject chest, shop;
     public Color fullHealthColor = Color.red;
     public Color zeroHealthColor = Color.gray;
     public Slider slider;
@@ -20,15 +20,15 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb2d;
     private Vector2 moveVelocity;
-    private string attack_button, action_button, heal_button;
+    private string attack_button, action_button, heal_button, shop_button;
     private GameObject hiddenRoom, gameManager, player;
     private GameObject rightRoom,leftRoom, topRoom, bottomRoom;
     private int x, y;
     private GameManager gm;
     private HealthController hc;
     private bool facingRight;
-    private GameObject InstantiatedchestMessage, InstantiatedcurrencyMessage, InstantiatedhiddenMessage, InstantiatedshopMessage;
-    private bool spawnChestMessageOnce, spawnCurrencyMessageOnce, spawnhiddenMessageOnce, spawnshopMessageOnce;
+    private GameObject InstantiatedchestMessage, InstantiatedcurrencyMessage, InstantiatedhiddenMessage, InstantiatedshopMessage, Instantiatedshop;
+    private bool spawnChestMessageOnce, spawnCurrencyMessageOnce, spawnhiddenMessageOnce, spawnshopMessageOnce, spawnShop, displayShop;
     private Material rightSide;
     
 
@@ -40,7 +40,10 @@ public class PlayerController : MonoBehaviour
         attack_button = "Attack";
         action_button = "Action";
         heal_button = "Heal";
+        shop_button = "Shop";
         facingRight = true;
+        spawnShop = true;
+        displayShop = false;
         
         //rightSide = this.GetComponent<SpriteRenderer>().material;
     }
@@ -106,6 +109,11 @@ public class PlayerController : MonoBehaviour
 
             }
             
+        }
+
+        if (Input.GetButtonDown(shop_button))
+        {
+            Destroy(Instantiatedshop);
         }
 
         
@@ -232,10 +240,15 @@ public class PlayerController : MonoBehaviour
             
         }
 
-        if (Input.GetButtonDown(action_button) && other.gameObject.name == "shopkeeper")
+        if (Input.GetButtonDown(action_button) && other.gameObject.name == "shopkeeper" && !displayShop)
         {
             //Activate Shop Menu
             Debug.Log("Shop Activated");
+            Instantiatedshop = Instantiate(shop, transform.position, Quaternion.identity) as GameObject;
+            displayShop = true;
+            //spawnShop = false;
+
+
         }
 
         if (other.gameObject.name == "chest(Clone)" && !spawnChestMessageOnce)

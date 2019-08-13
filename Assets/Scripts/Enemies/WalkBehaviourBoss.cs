@@ -18,7 +18,7 @@ public class WalkBehaviourBoss : StateMachineBehaviour
     private float msDistance;
     private GameObject bossRoom;
     private Room roomScript;
-    
+    private PortalController pc;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -29,13 +29,13 @@ public class WalkBehaviourBoss : StateMachineBehaviour
         GameObject moveSpotGO = new GameObject();
         moveSpot = moveSpotGO.transform;
         roomScript = bossRoom.GetComponent<Room>();
-        minX = roomScript.leftwall.transform.position.x + 8;
+        minX = roomScript.leftwall.transform.position.x;
         Debug.Log("Left Boss wall: " + roomScript.leftwall.transform.position.x.ToString());
-        maxX = roomScript.rightwall.transform.position.x -8;
+        maxX = roomScript.rightwall.transform.position.x;
         Debug.Log("Right Boss wall: " + roomScript.rightwall.transform.position.x.ToString());
-        minY = roomScript.bottomwall.transform.position.y + 8;
+        minY = roomScript.bottomwall.transform.position.y;
         Debug.Log("Bottom Boss wall: " + roomScript.bottomwall.transform.position.y.ToString());
-        maxY = roomScript.topwall.transform.position.y - 8;
+        maxY = roomScript.topwall.transform.position.y;
         Debug.Log("Top Boss wall: " + roomScript.topwall.transform.position.y.ToString());
         Debug.Log("Boss X movement: " + animatorPos.position.x.ToString());
         if (animatorPos.position.x > minX && animatorPos.position.x < maxX && animatorPos.position.y > minY && animatorPos.position.y < maxY)
@@ -52,6 +52,17 @@ public class WalkBehaviourBoss : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (moveSpot.position.x == 0 && moveSpot.position.y == 0)
+        {
+            animator.SetBool("isFollowing", true);
+        }
+
+        var player = GameObject.Find("Player");
+        pc = player.GetComponent<PortalController>();
+        if (pc.spawnBoss)
+        {
+            animator.SetBool("isFollowing", true);
+        }
         animator.transform.position = Vector2.MoveTowards(animator.transform.position, moveSpot.position, speed * Time.deltaTime);
         if (Vector2.Distance(animator.transform.position, moveSpot.position) < 0.2f)
         {

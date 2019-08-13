@@ -19,7 +19,8 @@ public class PortalController : MonoBehaviour
     private string action_button;
     private bool nextLevel;
     private bool pressed = false;
-    private GameObject InstantiatedportalMessage, InstantiatedportalMessageExit;
+    private bool spawned = false;
+    private GameObject InstantiatedportalMessage, InstantiatedportalMessageExit ;
     private GameObject player;
     private HealthController hc;
     private Transform playerPosition;
@@ -30,6 +31,7 @@ public class PortalController : MonoBehaviour
     private float msDistance;
     private GameObject bossRoomPosition;
     private Room roomScript;
+    
 
 
     // Start is called before the first frame update
@@ -77,18 +79,18 @@ public class PortalController : MonoBehaviour
         {
             bossRoomPosition = GameObject.FindGameObjectWithTag("bossRoom");
             playerPosition = GameObject.FindGameObjectWithTag("Player").transform;
-            if (bossRoomPosition != null && pressed)
+            if (bossRoomPosition != null && spawned)
             {
                 roomScript = bossRoomPosition.GetComponent<Room>();
-                minX = roomScript.leftwall.transform.position.x + 8;
-                maxX = roomScript.rightwall.transform.position.x - 8;
-                minY = roomScript.bottomwall.transform.position.y + 8;
-                maxY = roomScript.topwall.transform.position.y - 8;
+                minX = roomScript.leftwall.transform.position.x + 20;
+                maxX = roomScript.rightwall.transform.position.x - 20;
+                minY = roomScript.bottomwall.transform.position.y + 20;
+                maxY = roomScript.topwall.transform.position.y - 20;
                 if (playerPosition.position.x > minX && playerPosition.position.x < maxX && playerPosition.position.y > minY && playerPosition.position.y < maxY)
                 {
                     var levelMusic = GameObject.Find("GameManager").GetComponent<AudioSource>();
                     levelMusic.Pause();
-                    audioSources[3].Play();
+                    //audioSources[3].Play();
 
                 }
             }
@@ -113,51 +115,53 @@ public class PortalController : MonoBehaviour
                 }
                 else
                 {
-
                     InstantiatedportalMessageExit = Instantiate(portalMessageExit, transform.position, Quaternion.identity) as GameObject;
                     spawnPortalMessageOnce = true;
                 }
 
             }
-        }
-        if (other.gameObject.name == "portal" && Input.GetButtonDown(action_button))
-        {
-            //Spawns the Boss the first time it is pressed, and all doors will be closed
-            if (!pressed)
-            {
-                var bossMusic = GameObject.Find("Player");
-                audioSources = bossMusic.GetComponents<AudioSource>();
-                audioSources[3].Play();
-                var levelMusic = GameObject.Find("GameManager").GetComponent<AudioSource>();
-                levelMusic.Pause();
-                spawnBoss = true;
-                pressed = true;
 
-                var bossRoom = GameObject.FindWithTag("bossRoom").GetComponent<PortalController>();
-
-                bossRoom.spawnBoss = true;
-
-                bossRoom.col_bottom.isTrigger = false;
-                bossRoom.col_up.isTrigger = false;
-                bossRoom.col_left.isTrigger = false;
-                bossRoom.col_right.isTrigger = false;
-
-            }
-        }
-        if (pressed && nextLevel)
-        {
             if (other.gameObject.name == "portal" && Input.GetButtonDown(action_button))
             {
-                //Boss is defeated and go to next level
-                this.GetComponent<Animator>().enabled = true;
-                this.GetComponent<Animator>().SetBool("enter", true);
-                Invoke("nextStage", 2f);
-                
+                //Spawns the Boss the first time it is pressed, and all doors will be closed
+                if (!pressed)
+                {
+                    var bossMusic = GameObject.Find("Player");
+                    audioSources = bossMusic.GetComponents<AudioSource>();
+                    audioSources[3].Play();
+                    var levelMusic = GameObject.Find("GameManager").GetComponent<AudioSource>();
+                    levelMusic.Pause();
+                    spawnBoss = true;
+                    pressed = true;
+                    spawned = true;
+
+                    var bossRoom = GameObject.FindWithTag("bossRoom").GetComponent<PortalController>();
+
+                    bossRoom.spawnBoss = true;
+
+                    bossRoom.col_bottom.isTrigger = false;
+                    bossRoom.col_up.isTrigger = false;
+                    bossRoom.col_left.isTrigger = false;
+                    bossRoom.col_right.isTrigger = false;
+
+                }
+            }
+            if (pressed && nextLevel)
+            {
+                if (other.gameObject.name == "portal" && Input.GetButtonDown(action_button))
+                {
+                    //Boss is defeated and go to next level
+                    this.GetComponent<Animator>().enabled = true;
+                    this.GetComponent<Animator>().SetBool("enter", true);
+                    Invoke("nextStage", 2f);
+
+
+                }
+
 
             }
-            
-
         }
+        
     }
 
     void OnCollisionExit2D(Collision2D other)
@@ -184,4 +188,6 @@ public class PortalController : MonoBehaviour
         var gameManager = GameObject.Find("GameManager");
         gameManager.GetComponent<GameManager>().rebuild = true;
     }
+
+
 }
