@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject roomController, saveProgressText, levelupText;
-    public TextMeshProUGUI currencyText, potionText, liveCounterText;
+    public TextMeshProUGUI currencyText, potionText, liveCounterText, stagetext;
     public int stage;
     public float initialHealth_p, initialHealth_e, initialHealth_b, regenHealth, currentHealth_p, currentHealth_e, currentHealth_b;
     public int currentExp, totalExp, expGained_e, expGained_b, expGained_p;
@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     private GameObject InstantiatedsaveMessage, InstantiatedLevelupMessage;
     private bool spawnMessageOnce = false;
     private bool spawnLevelupOnce = false;
+    private AudioSource[] audioSources;
 
     void Awake()
     {
@@ -100,6 +101,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SceneManager.GetActiveScene().name == "NewGame")
+        {
+            stagetext.text = stage.ToString();
+        }
         if (Input.GetButtonDown("Save"))
         {
 
@@ -118,8 +123,10 @@ public class GameManager : MonoBehaviour
         //re-instantiate RoomController to generate new map
         if (rebuild)
         {
-
-            
+            var bossMusic = GameObject.Find("Player");
+            audioSources = bossMusic.GetComponents<AudioSource>();
+            audioSources[3].Pause();
+            levelMusic.Play();
             if (SceneManager.GetActiveScene().name == "Tutorial")
             {
                 SceneManager.LoadScene("NewGame");

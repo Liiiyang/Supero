@@ -25,5 +25,5 @@ EditorBuildSettings:
     guid: e351e26f6d0bd2e4aa97d4fd94df4507
   - enabled: 1
     path: Assets/Scenes/Rooms/NewGame.unity
-    guid: a52629aad6932374e9b00c574ae94721
+    guid: 6b98ea23b52b997419793becd7585b21
   m_configObjects: {}

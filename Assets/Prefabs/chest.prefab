@@ -83,7 +83,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e79ca257655aef44f9c4e92ffb1ba606, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -194,6 +194,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chest_center: {fileID: 6095215147588515300}
   chest_size: {x: 2.5, y: 2.5, z: 0}
-  player:
+  p:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
+  gainedText: {fileID: 0}
+  canvas: {fileID: 6276824470618673901, guid: 7d655a0322d6b404d901d4950362d2e5, type: 3}
