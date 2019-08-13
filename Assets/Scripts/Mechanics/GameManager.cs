@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour
 {
     public GameObject roomController, saveProgressText, levelupText;
+    public GameObject[] inventory;
     public TextMeshProUGUI currencyText, potionText, liveCounterText, stagetext;
     public int stage;
     public float initialHealth_p, initialHealth_e, initialHealth_b, regenHealth, currentHealth_p, currentHealth_e, currentHealth_b;
@@ -30,9 +32,11 @@ public class GameManager : MonoBehaviour
     private bool spawnMessageOnce = false;
     private bool spawnLevelupOnce = false;
     private AudioSource[] audioSources;
+    private bool test = false;
 
     void Awake()
     {
+
         Debug.Log("Save Test: " + StaticSaveFile.save);
         if (StaticSaveFile.save == "save")
         {
@@ -60,7 +64,7 @@ public class GameManager : MonoBehaviour
         regenRate_p =((stage - 1)* 20f)+ 40f;
 
         totalStamina_e = ((stage - 1)* 10f) + 400f;
-        attackDamage_e = ((stage - 1)* 10f) + 60f;
+        attackDamage_e = ((stage - 1)* 10f) + 30f;
         stamina_e = ((stage - 1)*  10f) + 60f;
         regenRate_e = ((stage - 1)* 15f) + 30f;
 
@@ -101,9 +105,44 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            for (int i = 0; i < currentShopList.Count; i++)
+            {
+                if (!test)
+                {
+                    if (currentShopList[i].itemName == "Health Potion")
+                    {
+                        currentPotions += 1;
+                        potionText.text = currentPotions.ToString();
+                        currency_p -= currentShopList[i].price;
+                    }
+                    else
+                    {
+                        if (currentShopList[0].itemName != "Health Potion")
+                        {
+                            inventory[i].AddComponent<Image>().sprite = currentShopList[i].icon;
+                            currency_p -= currentShopList[i].price;
+                        }
+                        else
+                        {
+                            inventory[i-1].AddComponent<Image>().sprite = currentShopList[i].icon;
+                            currency_p -= currentShopList[i].price;
+                        }
+                       
+
+                    }
+                }
+
+            }
+            currencyText.text = currency_p.ToString();
+            test = true;
+            
+        }
+           
         if (SceneManager.GetActiveScene().name == "NewGame")
         {
-            stagetext.text = stage.ToString();
+            stagetext.text = "0" + stage.ToString();
         }
         if (Input.GetButtonDown("Save"))
         {

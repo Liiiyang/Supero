@@ -36,6 +36,10 @@ public class MenuButton : MonoBehaviour
 
                 playerUI = GameObject.Find("playerRest");
                 playerUI.GetComponent<Animator>().SetBool("startPressed", true);
+                if (gameObject.name == "Quit")
+                {
+                    Application.Quit();
+                }
                 StartCoroutine(startGame());
                 
 
@@ -70,6 +74,7 @@ public class MenuButton : MonoBehaviour
             StaticSaveFile.save = "save";
             SceneManager.LoadScene("NewGame");
         }
+       
 
     }
 

@@ -22,6 +22,8 @@ TagManager:
   - bossSlider
   - shopkeeper
   - Room
+  - MoveSpot
+  - inventory
   layers:
   - Default
   - TransparentFX

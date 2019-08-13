@@ -557,6 +557,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 9021636676827024509, guid: aaf67252f338d434f935d0a1799e3c5b,
     type: 3}
+  playerGO: {fileID: 0}
+  bossRoom: {fileID: 0}
   startTimeBtwShots: 2
 --- !u!114 &6814942326191852275
 MonoBehaviour:
@@ -1273,9 +1275,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2696378068259279587}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 50
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 50
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

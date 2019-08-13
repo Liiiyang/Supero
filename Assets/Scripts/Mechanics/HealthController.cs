@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 //Controls the Health of Player, Enemy and Boss
 public class HealthController : MonoBehaviour
@@ -35,6 +36,8 @@ public class HealthController : MonoBehaviour
     private AudioSource[] enemyDead;
     private GameObject InstantiatedDeadMessage, Instantiatedbossdefeated;
     private bool bossdefeated = false;
+    private bool dead = false;
+    private TextMeshProUGUI deadText;
     
     Vector3 startPos;
 
@@ -158,8 +161,22 @@ public class HealthController : MonoBehaviour
         {
             if (gm.liveCounter > 0)
             {
-                InstantiatedDeadMessage = Instantiate(deadMessage, transform.position, Quaternion.identity) as GameObject;
-                Invoke("destroyMessage", 2f);
+                if (!dead)
+                {
+                    InstantiatedDeadMessage = Instantiate(deadMessage, transform.position, Quaternion.identity) as GameObject;
+                    if (SceneManager.GetActiveScene().name == "Tutorial")
+                    {
+                        InstantiatedDeadMessage.transform.Find("highscore").GetComponent<TextMeshProUGUI>().text = "Stage Cleared: Tutorial";
+                    }
+                    else
+                    {
+                        InstantiatedDeadMessage.transform.Find("highscore").GetComponent<TextMeshProUGUI>().text = "Stage Cleared: " + gm.stage.ToString();
+                    }
+                    
+                    Invoke("destroyMessage", 2f);
+                    dead = true;
+                }
+
                 bossMusic = gameObject.GetComponents<AudioSource>();
                 bossMusic[3].Pause();
                 gameManager.GetComponent<AudioSource>().Play();
@@ -292,6 +309,7 @@ public class HealthController : MonoBehaviour
     private void destroyMessage()
     {
         Destroy(InstantiatedDeadMessage);
+        dead = false;
     }
     private void destroybossMessage()
     {

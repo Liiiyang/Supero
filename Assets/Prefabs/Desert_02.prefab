@@ -207,7 +207,7 @@ MonoBehaviour:
   zeroStaminaColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   slider: {fileID: 4682883026060390029}
   FillImage: {fileID: 2389818205906918338}
-  attack_Sound: {fileID: 0}
+  attack_Sound: {fileID: 8567396891746681788}
   player_attack: {fileID: 0}
 --- !u!82 &631602975415017920
 AudioSource:

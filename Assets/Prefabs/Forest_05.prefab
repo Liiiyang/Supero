@@ -506,9 +506,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4619531042674895258}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 50
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 50
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -759,7 +759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPos: {fileID: 2276175039225863215}
   floatingText: {fileID: 9048768028092174361}
-  attackRange: 0
+  attackRange: 0.59
   designatedEnemy:
     serializedVersion: 2
     m_Bits: 512
@@ -915,6 +915,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 3704415070928775012, guid: 1bbe730aaff4131419d0f6b5cfa2cdb0,
     type: 3}
+  playerGO: {fileID: 0}
+  bossRoom: {fileID: 0}
   startTimeBtwShots: 2
 --- !u!1 &5788505532244927372
 GameObject:

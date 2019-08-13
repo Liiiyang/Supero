@@ -42,7 +42,7 @@ public class WalkBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (moveSpot.position.x == 0 && moveSpot.position.y == 0)
+        if ((moveSpot.position.x == 0 && moveSpot.position.y == 0) || moveSpot.position.x == null || moveSpot.position.y == null)
         {
             animator.SetBool("isIdle", true);
         }

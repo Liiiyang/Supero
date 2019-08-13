@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
             if (gm.currentPotions != 0)
             {
                 gm.currentPotions -= 1;
-                if ((gm.currentHealth_p + gm.regenHealth) <=gm.initialHealth_p)
+                if ((gm.currentHealth_p + gm.regenHealth) <= gm.initialHealth_p)
                 {
                     gm.currentHealth_p += gm.regenHealth;
                     SetHealthUI();
@@ -114,6 +114,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown(shop_button))
         {
             Destroy(Instantiatedshop);
+            displayShop = false;
         }
 
         

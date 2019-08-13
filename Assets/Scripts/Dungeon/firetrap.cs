@@ -14,7 +14,7 @@ public class firetrap : MonoBehaviour
     {
         fireCollision = this.GetComponent<Collider2D>();
         //fireSound = this.GetComponent<AudioSource>();
-        flameDamage = 50f;
+        flameDamage = 10f;
         firetrapSound.Play();
         
     }

@@ -11,6 +11,7 @@ public class chestController : MonoBehaviour
     public LayerMask p;
     //public TextMeshProUGUI gainedText;
     public GameObject canvas;
+    public AudioSource coins;
 
     private Animator chestAnimation;
     private GameObject gameManager;
@@ -32,6 +33,7 @@ public class chestController : MonoBehaviour
     {
         if (Input.GetButtonDown(action_button))
         {
+            
 
             Collider2D[] player = Physics2D.OverlapBoxAll(chest_center.position, chest_size, p);
             for (int i = 0; i < player.Length; i++)
@@ -39,6 +41,7 @@ public class chestController : MonoBehaviour
                 if (player[i].name == "Player")
                 {
                     gameObject.GetComponent<Animator>().Play("chest");
+                    coins.Play();
                     //Instantiate an item here
                     
                     gained = Random.Range(100, 500);

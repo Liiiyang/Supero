@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Rooms/RoomStart.unity
-    guid: 30706821fbdc1e9408fbd18dd52c6aee
-  - enabled: 1
     path: Assets/Scenes/Rooms/MainMenu.unity
     guid: c5d207e6474914b4988639513fbe8128
   - enabled: 1
@@ -25,5 +22,8 @@ EditorBuildSettings:
     guid: e351e26f6d0bd2e4aa97d4fd94df4507
   - enabled: 1
     path: Assets/Scenes/Rooms/NewGame.unity
-    guid: 6b98ea23b52b997419793becd7585b21
+    guid: 1140092f8dabf3d4f8e3ca6c9cb36f8d
+  - enabled: 1
+    path: Assets/Scenes/Rooms/RoomStart.unity
+    guid: 30706821fbdc1e9408fbd18dd52c6aee
   m_configObjects: {}
