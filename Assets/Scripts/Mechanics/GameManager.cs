@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            stage = 1;
+            stage = 4;
         }
 
         initialHealth_p = ((stage - 1) * 100f) + 400f;

@@ -50,10 +50,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -1666,4 +1664,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Rooms/Tutorial.unity
   - Assets/Scenes/Rooms/NewGame.unity
   - Assets/Scenes/Rooms/RoomStart.unity
-  playerPath: C:/Users/Li Yang/Desktop/NewSupero/Supero.exe
+  playerPath: D:/Documents/SUTD Documents/ISTD 50.033/NewSupero/Supero.exe
