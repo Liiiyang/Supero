@@ -4,13 +4,13 @@
 Supero is a single player rougelike action game developed for the Microsoft Windows platform. The target audience that we are looking at are dedicated players to the genre. The game takes place in a medieval world of knights and monster and the player takes the role of a knight character who betrayed his king. The lone knight is exiled to the dungeon where the only way out is onward and to survive as many stages by killing monsters and bosses. The main game concept is to establish a game that is challenging yet rewarding upon completion, and it focuses on tactical choice as the main game mechanic. In the game, the player can collect currency to purchase weapons and boost their own stats, like health and stamina. They must also defeat enemies and bosses which all have different movesets and can be taken down by employing different strategies which enables players freedom within the game. The stages are designed in such a way that the tutorials and the first stage will allow standard players to get used to the game mechanics and the way it is meant to be played, while exponentially scaling the game difficulty to make the challenge of the game apparent to the players in the later stages.
 
 ### Controls 
-W - Walk Up
-A - Walk Left
-S - Walk Down
-D - Walk Right
-E - Interact with Environment
-1 - Heal
-J - Attack
+* W - Walk Up
+* A - Walk Left
+* S - Walk Down
+* D - Walk Right
+* E - Interact with Environment
+* 1 - Heal
+* J - Attack
 
 ### Updates
 06/08/2019
